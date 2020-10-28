@@ -1,0 +1,77 @@
+---
+title: "Readme"
+output: 
+  github_document:
+    html_preview: false
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r builddate, echo=FALSE}
+paste0("Time of last build: ", Sys.time())
+```
+
+
+## Introduction
+
+`R` files associated with data analysis and writing for this project.
+This project uses the `drake` package to manage workflow and promote reproducibility.
+
+
+### Requirements
+
+- **NHD Plus**: This project utilizes the NHD National Seamless geodatabase. This is not included in the repository due to size. If you have a local copy, the source code can be modified to point to it. Otherwise, use `nhdplusTools` to download a copy.
+
+```{r eval=FALSE}
+nhdplusTools::download_nhdplusV2(outdir = here::here("data"))
+```
+
+- **Water Quality Data**: Water quality data was obtained from the Water Quality Portal (https://www.waterqualitydata.us/portal/) and is stored as a `.tsv` file under the `data/STORET` directory. The source data can be downloaded directly using the following URL: https://www.waterqualitydata.us/portal/#organization=TCEQMAIN&characteristicName=Escherichia%20coli&mimeType=tsv
+
+
+
+### Set local paths
+
+The `make.R` file should be updated with the appropriate file paths to `gdal v2.3.3` directory, the NHD geodatabase location, and NLCD data location. 
+
+```{r eval=FALSE}
+###########################
+#### set local options ####
+###########################
+# gdal v2.3.3 or greater must be installed
+# specify the path that gdal_warp.exe can be found
+gdal_directory <- "C:\\Users\\User.Name\\AppData\\Local\\Continuum\\anaconda3\\Library"
+# specify path to your nhdplus database
+nhd_data <- here::here("data/NHDPlusV21_NationalData_Seamless_Geodatabase_Lower48_07/NHDPlusNationalData/NHDPlusV21_National_Seamless_Flattened_Lower48.gdb")
+```
+
+
+## Building the project
+
+### Check for evidence of reproducibility
+
+```{r eval=FALSE}
+make(plan)
+config <- drake_config(plan)
+outdated(config)
+```
+
+### Replicate the project
+
+```{r eval=FALSE}
+clean() # removes author's results
+source("R/packages.R")  # loads packages
+source("R/dataRetrieval_functions.R")
+source("R/exploratory_report_functions.R")
+source("R/plan.R")      # creates the drake plan
+make(plan)
+```
+
+## Info
+
+### System config
+
+```{r}
+sessionInfo()
+```
