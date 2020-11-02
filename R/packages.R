@@ -17,6 +17,14 @@ library(hrbrthemes)
 library(extrafont)
 library(here)
 library(ragg)
+library(ggstance) ## used for geom_pointrangeh
+library(patchwork)
 suppressWarnings(suppressMessages(extrafont::font_import(here::here("data/fonts"), 
                                                          prompt = FALSE)))
 extrafont::loadfonts(device = "win", quiet = TRUE)
+
+
+## manuscripts and tables
+library(officer)
+library(officedown)
+library(flextable)

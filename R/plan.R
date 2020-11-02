@@ -47,30 +47,50 @@ plan <- drake_plan(
   #### Fit logistic regressions ####
   ##################################
   
+  lr_results = fit_lr_models(flow_adjusted_mk_results,
+                             unadjusted_mk_results),
+  
+  
   
   ################
   #### Tables ####
   ################
   
+  lr_tables = tabulate_lr(lr_results),
   
   #################
   #### Figures ####
   #################
-  fig_1 = plot_cume_dist(flow_adjusted_mk_results, 
+  fig_1 = plot_data_summary(cleaned_full_data,
+                            streamflow_record,
+                            file_name = file_out("figures/fig_1.png"),
+                            width = 140,
+                            height = 95,
+                            units = "mm",
+                            res = 300),
+  
+  fig_2 = plot_cume_dist(flow_adjusted_mk_results, 
                          unadjusted_mk_results,
-                         file_name = file_out("figures/fig_1.png"),
+                         file_name = file_out("figures/fig_2.png"),
                          width = 190,
                          height = 142.5,
                          units = "mm",
                          res = 300),
   
-  fig_2 = plot_mk_map(flow_adjusted_mk_results, 
+  fig_3 = plot_mk_map(flow_adjusted_mk_results, 
                       unadjusted_mk_results,
-                      file_name = file_out("figures/fig_2.png"),
+                      file_name = file_out("figures/fig_3.png"),
                       width = 190,
                       height = 190,
                       units = "mm",
                       res = 300),
+  
+  fig_4 = plot_log_models(lr_results,
+                          file_name = file_out("figures/fig_4.png"),
+                          width = 140,
+                          height = 95,
+                          units = "mm",
+                          res = 300),
   
   #####################
   #### Export Data ####

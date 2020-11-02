@@ -6,6 +6,7 @@ source("R/packages.R")  # loads packages
 source("R/download_data.R")
 source("R/mann-kendall-tests.R")
 source("R/figures.R")
+source("R/tables.R")
 source("R/plan.R")      # creates the drake plan
 
 ###########################
