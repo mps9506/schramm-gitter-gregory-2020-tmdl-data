@@ -35,8 +35,52 @@ plan <- drake_plan(
                                       swqm_sites,
                                       nwis_wqp_data,
                                       streamflow_record),
+  
+  #####################################
+  #### Modified Mann-Kendall Tests ####
+  #####################################
+  
+  unadjusted_mk_results = run_mk_test(cleaned_full_data),
+  flow_adjusted_mk_results = run_fa_mk_test(cleaned_full_data),
+  
+  ##################################
+  #### Fit logistic regressions ####
+  ##################################
+  
+  
+  ################
+  #### Tables ####
+  ################
+  
+  
+  #################
+  #### Figures ####
+  #################
+  fig_1 = plot_cume_dist(flow_adjusted_mk_results, 
+                         unadjusted_mk_results,
+                         file_name = file_out("figures/fig_1.png"),
+                         width = 190,
+                         height = 142.5,
+                         units = "mm",
+                         res = 300),
+  
+  fig_2 = plot_mk_map(flow_adjusted_mk_results, 
+                      unadjusted_mk_results,
+                      file_name = file_out("figures/fig_2.png"),
+                      width = 190,
+                      height = 190,
+                      units = "mm",
+                      res = 300),
+  
+  #####################
+  #### Export Data ####
+  #####################
 
-  ## render readme
+  
+  #######################
+  #### Render Readme ####
+  #######################
+  
   readme = rmarkdown::render(
     knitr_in("Readme.Rmd"),
     output_file = file_out("Readme.md"),

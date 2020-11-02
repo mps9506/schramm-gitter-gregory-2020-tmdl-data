@@ -21,7 +21,7 @@ find_sites <- function(x){
   df <- whatWQPsites(type = "Stream",
                organization = "TCEQMAIN",
                characteristicName = "Escherichia coli",
-               startDateLo = "01-01-2005",
+               startDateLo = "01-01-2012",
                startDateHi = "12-31-2019") %>%
     st_as_sf(coords = c("LongitudeMeasure", "LatitudeMeasure")) %>%
     st_set_crs(4326)
@@ -50,7 +50,7 @@ download_ecoli <- function(x) {
   
   df <- readWQPqw(siteNumbers = x$MonitoringLocationIdentifier,
                   parameterCd = "Escherichia coli",
-                  startDate = "2005-01-01",
+                  startDate = "2012-01-01",
                   endDate = "2019-12-31")
   
   df
