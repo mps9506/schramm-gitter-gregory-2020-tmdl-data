@@ -62,7 +62,11 @@ clean_ecoli_data <- function(x) {
     dplyr::select(OrganizationIdentifier, OrganizationFormalName, ActivityIdentifier,
                   ActivityStartDate, MonitoringLocationIdentifier, CharacteristicName,
                   ResultMeasureValue, `ResultMeasure.MeasureUnitCode`, ResultCommentText,
-                  ProviderName)
+                  ProviderName) %>%
+    mutate(ResultMeasureValue = case_when(
+      ResultMeasureValue == 0 ~ 1,
+      ResultMeasureValue != 0 ~ ResultMeasureValue
+    ))
 }
 
 
@@ -182,24 +186,24 @@ query_nldi <- function(x, y) {
 
   df <- df %>%
     mutate(upstreamNWIS = purrr::map(wqpsite,
-                                     ~{Sys.sleep(8) ## long pause so not to piss off nldi server
+                                     ~{Sys.sleep(6) ## long pause so not to piss off nldi server
                                        print(.$featureID)
                                        navigate_nldi(.,
                                                      mode = "upstreamMain",
                                                      data_source = "nwissite",
-                                                     distance_km = 30) ## returns upstream NWIS gages within 1 mile
+                                                     distance_km = 2) ## returns upstream NWIS gages within 1 mile
                                      }
     ))
 
   cat(crayon::blue("finding downstream gages\n This takes a while"))
   df <- df %>%
     mutate(downstreamNWIS = purrr::map(wqpsite,
-                                       ~{Sys.sleep(8) ## long pause so not to piss off nldi server
+                                       ~{Sys.sleep(6) ## long pause so not to piss off nldi server
                                          print(.$featureID)
                                          navigate_nldi(.,
                                                        mode = "downstreamMain",
                                                        data_source = "nwissite",
-                                                       distance_km = 30) ## returns downstream NWIS gages
+                                                       distance_km = 2) ## returns downstream NWIS gages
                                        }
     ))
 

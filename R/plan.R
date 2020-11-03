@@ -97,6 +97,14 @@ plan <- drake_plan(
   #####################
 
   
+  ###########################
+  #### Render Manuscript ####
+  ###########################
+  manuscript = rmarkdown::render(
+    knitr_in(here::here("manuscript/esp_manuscript.Rmd")),
+    output_file = file_out(here::here("manuscript/esp_manuscript.docx"))
+  ),
+  
   #######################
   #### Render Readme ####
   #######################

@@ -12,6 +12,9 @@ library(archive)
 library(smwrBase)
 library(smwrStats)
 
+## logistice regression and estimated means
+library(emmeans)
+
 ## plotting functions
 library(hrbrthemes)
 library(extrafont)
@@ -25,6 +28,7 @@ extrafont::loadfonts(device = "win", quiet = TRUE)
 
 
 ## manuscripts and tables
+library(bookdown)
 library(officer)
 library(officedown)
 library(flextable)

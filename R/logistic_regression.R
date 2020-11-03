@@ -63,7 +63,5 @@ fit_lr_models <- function(fa_results,
   
 }
 
-fit_lr_models(readd(flow_adjusted_mk_results),
-              readd(unadjusted_mk_results))
 
 
