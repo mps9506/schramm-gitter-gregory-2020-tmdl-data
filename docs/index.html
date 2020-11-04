@@ -1,0 +1,425 @@
+<html>
+  <head>
+    <title>Data for Total Maximum Daily Loads and Escherichia coli trends in Texas freshwater streams</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="application/ld+json">
+      {
+  "@context": "http://schema.org",
+  "type": "Dataset",
+  "name": "Data for Total Maximum Daily Loads and Escherichia coli trends in Texas freshwater streams",
+  "creator": [
+    {
+      "type": "Person",
+      "id": "0000-0003-1876-6592",
+      "email": "michael.schramm@ag.tamu.edu",
+      "affiliation": "Texas Water Resources Institute",
+      "name": "Michael Schramm"
+    }
+  ],
+  "description": "This dataset includes E. coli bacteria measurements and associated flow data for 778 water quality monitoring stations in Texas. The data was used to evaluate trends in E. coli bacteria concentration and the effectiveness of TMDLs at reducing E. coli concentrations.",
+  "datePublished": "2020-11-04",
+  "keywords": ["water quality", "total maximum daily load", "watershed", "E. coli", "fecal indicator bacteria"],
+  "funder": null,
+  "temporalCoverage": "NA/NA",
+  "license": null,
+  "spatialCoverage": {
+    "type": "Place",
+    "name": "Texas",
+    "geo": {
+      "type": "GeoShape",
+      "box": "36.7949898174973 -92.900390625 25.3874573255634 -107.7099609375"
+    }
+  },
+  "variableMeasured": [
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "ActivityStartDate",
+      "description": "Recorded date of monitoring activity"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "MonitoringLocationIdentifier",
+      "description": "Location of monitoring activity (TCEQ SWQM station)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "CharacteristicName",
+      "description": "Monitoring characteristic name"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "ResultMeasureValue",
+      "description": "Reported E. coli lab result (MPN/100 mL)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "AU",
+      "description": "Assessment Unit identifier for Monitoring Location"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "Impaired",
+      "description": "Indicates impairement status of the monitoring location"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "Segment",
+      "description": "Segment Identifier for Monitoring Location"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "TMDL",
+      "description": "TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "geometry",
+      "description": "Lon, Lat"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "USGSSite_No",
+      "description": "Associated USGS Stream Gage"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "Flow",
+      "description": "Mean daily streamflow value of ActivityStartDate (cfs)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_pvalue",
+      "description": "p-value from the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_kendallsTau",
+      "description": "Kendall's Tau from the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_slope",
+      "description": "Sen Slope from the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_n",
+      "description": "number of samples used in the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "pvalue",
+      "description": "p-value from the unadjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "kendallsTau",
+      "description": "Kendall's Tau from the unadjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "slope",
+      "description": "Sen Slope from the unadjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "n",
+      "description": "number of samples used in the unadjusted Mann-Kendall trend test"
+    }
+  ],
+  "distribution": [
+    {
+      "type": "DataDownload",
+      "name": "cleaned_data",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "flow_adjusted_mk_results",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "unadjusted_mk_results",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    }
+  ]
+}
+
+    </script>
+    <style>
+      body {
+        font-size: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        margin: 0 auto;
+        padding: 1rem;
+        max-width: 800px;
+      }
+
+      #map {
+        height: 20rem;
+      }
+
+      #attributes-wrapper,
+      #jsonld-wrapper {
+        height: 20rem;
+        overflow-y: scroll;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      th {
+        border-bottom: 1px solid black;
+      }
+
+      th, td {
+        padding: 0.25rem;
+      }
+
+      table.listing td {
+        border: 1px solid #CCC;
+      }
+
+      table.listing tr td:first-child {
+          background-color: #EEE;
+      }
+
+      table.listing ul {
+        margin: 0 0 0 1.5rem;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Data for Total Maximum Daily Loads and Escherichia coli trends in Texas freshwater streams</h1>
+    <p><strong>Description:</strong> This dataset includes E. coli bacteria measurements and associated flow data for 778 water quality monitoring stations in Texas. The data was used to evaluate trends in E. coli bacteria concentration and the effectiveness of TMDLs at reducing E. coli concentrations.</p>
+
+    <h2>Bibliographic</h2>
+
+    <table class="listing">
+      <tr>
+        <td>Published</td>
+        <td>2020-11-04</td>
+      </tr>
+      <tr>
+        <td>Keywords</td>
+        <td>
+          <ul>
+            <li>water quality</li>
+            <li>total maximum daily load</li>
+            <li>watershed</li>
+            <li>E. coli</li>
+            <li>fecal indicator bacteria</li>
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Funder</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>License</td>
+        <td></td>
+      </tr>
+    </table>
+
+    <h2>Coverage</h2>
+
+    <h3>Temporal</h3>
+
+    <table class="listing">
+      <tr>
+        <td>Begin</td>
+        <td>NA</td>
+      </tr>
+      <tr>
+        <td>End</td>
+        <td>NA</td>
+      </tr>
+    </table>
+
+    <h3>Spatial</h3>
+    <pre><code></code></pre>
+    <div id="map"></div>
+
+    <h2>Attributes</h2>
+
+    <div id="attributes-wrapper">
+      <table id="attributes">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ActivityStartDate</td>
+            <td>Recorded date of monitoring activity</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>MonitoringLocationIdentifier</td>
+            <td>Location of monitoring activity (TCEQ SWQM station)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>CharacteristicName</td>
+            <td>Monitoring characteristic name</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>ResultMeasureValue</td>
+            <td>Reported E. coli lab result (MPN/100 mL)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>AU</td>
+            <td>Assessment Unit identifier for Monitoring Location</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Impaired</td>
+            <td>Indicates impairement status of the monitoring location</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Segment</td>
+            <td>Segment Identifier for Monitoring Location</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>TMDL</td>
+            <td>TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>geometry</td>
+            <td>Lon, Lat</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>USGSSite_No</td>
+            <td>Associated USGS Stream Gage</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Flow</td>
+            <td>Mean daily streamflow value of ActivityStartDate (cfs)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>fa_pvalue</td>
+            <td>p-value from the flow-adjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>fa_kendallsTau</td>
+            <td>Kendall's Tau from the flow-adjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>fa_slope</td>
+            <td>Sen Slope from the flow-adjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>fa_n</td>
+            <td>number of samples used in the flow-adjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>pvalue</td>
+            <td>p-value from the unadjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>kendallsTau</td>
+            <td>Kendall's Tau from the unadjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>slope</td>
+            <td>Sen Slope from the unadjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>n</td>
+            <td>number of samples used in the unadjusted Mann-Kendall trend test</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Distribution</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Format</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>cleaned_data</td>
+          <td>csv</td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td>flow_adjusted_mk_results</td>
+          <td>csv</td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td>unadjusted_mk_results</td>
+          <td>csv</td>
+          <td><a href="">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
+    <script>
+      var mymap = L.map('map').setView([31.0912235715304, -100.30517578125], 1);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxZoom: 18,
+      }).addTo(mymap);
+
+      var polygon = L.polygon([[ 36.7949898174973, -92.900390625], [ 25.3874573255634, -92.900390625], [ 25.3874573255634, -107.7099609375], [ 36.7949898174973, -107.7099609375]]).addTo(mymap);
+    </script>
+  </body>
+</html>
