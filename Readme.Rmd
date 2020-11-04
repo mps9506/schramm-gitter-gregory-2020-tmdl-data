@@ -8,6 +8,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
+
 ```{r builddate, echo=FALSE}
 paste0("Time of last build: ", Sys.time())
 ```
@@ -15,9 +19,20 @@ paste0("Time of last build: ", Sys.time())
 
 ## Introduction
 
-`R` files associated with data acquisition and cleaning for ...
 This project uses the `drake` package to manage workflow and promote reproducibility.
 
+Research data and metadata are located in:
+
+```
+data/cleaned_data.csv
+data/flow_adjusted_mk_results.csv
+data/unadjusted_mk_results.csv
+data/metadata/
+```
+
+## Reproduce the Project
+
+If you would like to reproduce the project please follow the suggested guidelines below. The required R packages are detailed at the end.
 
 ### Requirements
 
@@ -27,27 +42,13 @@ This project uses the `drake` package to manage workflow and promote reproducibi
 nhdplusTools::download_nhdplusV2(outdir = here::here("data"))
 ```
 
-### Set local paths
-
-The `make.R` file should be updated with the appropriate file paths to `gdal v2.3.3` directory, the NHD geodatabase location, and NLCD data location. 
-
-```{r eval=FALSE}
-###########################
-#### set local options ####
-###########################
-# gdal v2.3.3 or greater must be installed
-# specify the path that gdal_warp.exe can be found
-gdal_directory <- "C:\\Users\\User.Name\\AppData\\Local\\Continuum\\anaconda3\\Library"
-# specify path to your nhdplus database
-nhd_data <- here::here("data/NHDPlusV21_NationalData_Seamless_Geodatabase_Lower48_07/NHDPlusNationalData/NHDPlusV21_National_Seamless_Flattened_Lower48.gdb")
-```
-
 
 ## Building the project
 
 ### Check for evidence of reproducibility
 
 ```{r eval=FALSE}
+library(drake)
 make(plan)
 config <- drake_config(plan)
 outdated(config)
@@ -57,15 +58,19 @@ outdated(config)
 
 ```{r eval=FALSE}
 clean()
-source("R/packages.R")
+source("R/packages.R")  
 source("R/download_data.R")
-source("R/plan.R")
+source("R/mann-kendall-tests.R")
+source("R/logistic_regression.R")
+source("R/figures.R")
+source("R/tables.R")
+source("R/plan.R")  
 
-#######################
-#### Local options ####
-#######################
+###########################
+#### set local options ####
+###########################
 
-## specify path to your nhdplus database
+# specify path to your nhdplus database
 nhd_data <- "E:\\TWRI\\Data-Resources\\NHDPlusV21_NationalData_Seamless_Geodatabase_Lower48_07\\NHDPlusNationalData\\NHDPlusV21_National_Seamless_Flattened_Lower48.gdb"
 
 ##########################################################
@@ -73,7 +78,10 @@ nhd_data <- "E:\\TWRI\\Data-Resources\\NHDPlusV21_NationalData_Seamless_Geodatab
 ##########################################################
 
 nhdplus_path(nhd_data)
-make(plan)
+
+make(
+  plan
+)
 ```
 
 ## Info

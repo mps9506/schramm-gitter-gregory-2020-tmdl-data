@@ -23,11 +23,8 @@ nhd_data <- "E:\\TWRI\\Data-Resources\\NHDPlusV21_NationalData_Seamless_Geodatab
 
 nhdplus_path(nhd_data)
 
-progress()
 
 make(
   plan
 )
 
-#config <- drake_config(plan)
-#drake_ggraph(config)
