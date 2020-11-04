@@ -95,3 +95,71 @@ run_fa_mk_test <- function(model_df) {
   
 }
 
+##############################
+#### Summarize MK results ####
+##############################
+
+apply_t_test <- function(x, y) {
+  df <- x %>%
+    dplyr::select(MonitoringLocationIdentifier, slope) %>%
+    right_join(y %>% select(MonitoringLocationIdentifier, fa_slope)) %>%
+    tidyr::pivot_longer(!MonitoringLocationIdentifier)
+  
+  t.test(value ~ name,
+         paired = TRUE,
+         alternative = "less",
+         data = df)
+  
+}
+
+summary_mk_unadj <- function(x) {
+  x %>%
+    mutate(outcome = case_when(
+      slope < 0 & pvalue <= 0.1 ~ "improvement",
+      !(slope < 0 & pvalue <= 0.1) ~ "no improvement"
+    )) %>%
+    group_by(outcome) %>%
+    summarize(n = n(),
+              .groups = "drop") %>%
+    mutate(percent = n/sum(n) * 100)
+  
+  
+  x %>%
+    mutate(outcome = case_when(
+      slope < 0 & pvalue <= 0.1 ~ "improvement",
+      !(slope < 0 & pvalue <= 0.1) ~ "no improvement"
+    )) %>%
+    group_by(TMDL, outcome) %>%
+    summarize(n = n(),
+              .groups = "drop") %>%
+    group_by(TMDL) %>%
+    mutate(total = sum(n)) %>%
+    mutate(percent = n/total * 100)
+}
+
+
+summary_mk_adj <- function(x) {
+  x %>%
+    mutate(outcome = case_when(
+      fa_slope < 0 & fa_pvalue <= 0.1 ~ "improvement",
+      !(fa_slope < 0 & fa_pvalue <= 0.1) ~ "no improvement"
+    )) %>%
+    group_by(outcome) %>%
+    summarize(n = n(),
+              .groups = "drop") %>%
+    mutate(percent = n/sum(n) * 100)
+  
+  
+  
+  x %>%
+    mutate(outcome = case_when(
+      fa_slope < 0 & fa_pvalue <= 0.1 ~ "improvement",
+      !(fa_slope < 0 & fa_pvalue <= 0.1) ~ "no improvement"
+    )) %>%
+    group_by(TMDL, outcome) %>%
+    summarize(n = n(),
+              .groups = "drop") %>%
+    group_by(TMDL) %>%
+    mutate(total = sum(n)) %>%
+    mutate(percent = n/total * 100)
+}

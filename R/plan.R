@@ -56,6 +56,7 @@ plan <- drake_plan(
   #### Tables ####
   ################
   
+  data_summary_table = summarize_data(cleaned_full_data),
   lr_tables = tabulate_lr(lr_results),
   
   #################
