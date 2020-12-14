@@ -6,7 +6,7 @@ freshwater streams
 BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![DOI](https://zenodo.org/badge/307874510.svg)](https://zenodo.org/badge/latestdoi/307874510)
 
-    ## [1] "Time of last build: 2020-12-14 15:03:28"
+    ## [1] "Time of last build: 2020-12-14 15:27:36"
 
 This repository contains the data and code for Schramm, Gitter, and
 Gregory, “Total Maximum Daily Loads and *Escherichia coli* trends in
