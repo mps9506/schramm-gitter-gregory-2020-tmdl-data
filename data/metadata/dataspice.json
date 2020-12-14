@@ -1,0 +1,164 @@
+{
+  "@context": "http://schema.org",
+  "type": "Dataset",
+  "name": "Data for Total Maximum Daily Loads and Escherichia coli trends in Texas freshwater streams",
+  "creator": [
+    {
+      "type": "Person",
+      "id": "0000-0003-1876-6592",
+      "email": "michael.schramm@ag.tamu.edu",
+      "affiliation": "Texas Water Resources Institute",
+      "name": "Michael Schramm"
+    }
+  ],
+  "description": "This dataset includes E. coli bacteria measurements and associated flow data for 778 water quality monitoring stations in Texas. The data was used to evaluate trends in E. coli bacteria concentration and the effectiveness of TMDLs at reducing E. coli concentrations.",
+  "datePublished": "2020-11-04",
+  "keywords": ["water quality", "total maximum daily load", "watershed", "E. coli", "fecal indicator bacteria"],
+  "funder": null,
+  "temporalCoverage": "NA/NA",
+  "license": null,
+  "spatialCoverage": {
+    "type": "Place",
+    "name": "Texas",
+    "geo": {
+      "type": "GeoShape",
+      "box": "36.7949898174973 -92.900390625 25.3874573255634 -107.7099609375"
+    }
+  },
+  "variableMeasured": [
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "ActivityStartDate",
+      "description": "Recorded date of monitoring activity"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "MonitoringLocationIdentifier",
+      "description": "Location of monitoring activity (TCEQ SWQM station)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "CharacteristicName",
+      "description": "Monitoring characteristic name"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "ResultMeasureValue",
+      "description": "Reported E. coli lab result (MPN/100 mL)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "AU",
+      "description": "Assessment Unit identifier for Monitoring Location"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "Impaired",
+      "description": "Indicates impairement status of the monitoring location"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "Segment",
+      "description": "Segment Identifier for Monitoring Location"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "TMDL",
+      "description": "TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "geometry",
+      "description": "Lon, Lat"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "USGSSite_No",
+      "description": "Associated USGS Stream Gage"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "Flow",
+      "description": "Mean daily streamflow value of ActivityStartDate (cfs)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_pvalue",
+      "description": "p-value from the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_kendallsTau",
+      "description": "Kendall's Tau from the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_slope",
+      "description": "Sen Slope from the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "fa_n",
+      "description": "number of samples used in the flow-adjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "pvalue",
+      "description": "p-value from the unadjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "kendallsTau",
+      "description": "Kendall's Tau from the unadjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "slope",
+      "description": "Sen Slope from the unadjusted Mann-Kendall trend test"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "n",
+      "description": "number of samples used in the unadjusted Mann-Kendall trend test"
+    }
+  ],
+  "distribution": [
+    {
+      "type": "DataDownload",
+      "name": "cleaned_data",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "flow_adjusted_mk_results",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "unadjusted_mk_results",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    }
+  ]
+}

@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+data/nhd_staged/nhdplus_flowline.rds
+data/nhd_staged/nhdplus_catchment.rds
+# remove after manuscript is accepted #
+manuscript/

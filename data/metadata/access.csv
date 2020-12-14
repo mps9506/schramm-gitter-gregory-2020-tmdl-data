@@ -1,0 +1,4 @@
+fileName,name,contentUrl,encodingFormat
+cleaned_data.csv,cleaned_data,NA,csv
+flow_adjusted_mk_results.csv,flow_adjusted_mk_results,NA,csv
+unadjusted_mk_results.csv,unadjusted_mk_results,NA,csv
