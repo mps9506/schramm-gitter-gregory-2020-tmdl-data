@@ -1,5 +1,5 @@
 ---
-title: "Readme"
+title: "Total Maximum Daily Loads and Escherichia coli trends in Texas freshwater streams "
 output: 
   github_document:
     html_preview: false
@@ -16,12 +16,11 @@ knitr::opts_chunk$set(echo = TRUE)
 paste0("Time of last build: ", Sys.time())
 ```
 
+This repository contains the data and code for Schramm, Gitter, and Gregory, "Total Maximum Daily Loads and *Escherichia coli* trends in Texas freshwater streams." Manuscript is currently in submission.
 
 ## Introduction
 
-This project uses the `drake` package to manage workflow and promote reproducibility.
-
-Research data and metadata are located in:
+This project uses R and the `drake` package to manage workflow and promote reproducibility. Research data and metadata are located in:
 
 ```
 data/cleaned_data.csv
@@ -86,8 +85,15 @@ make(
 
 ## Info
 
+Code and data are shared un the CC By 4.0 license. If you use the code or data, please cite this source per the DOI and the DOI of the paper (in submission).
+
 ### System config
 
-```{r}
-sessionInfo()
+```{r include=FALSE}
+source("R/packages.R")  # loads packages
+```
+
+
+```{r echo=FALSE}
+sessioninfo::session_info()
 ```
