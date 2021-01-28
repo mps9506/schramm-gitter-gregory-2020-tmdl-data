@@ -95,7 +95,8 @@ plot_data_summary <- function(clean_data,
          width = width,
          height = height,
          units = units,
-         dpi = res)
+         dpi = res,
+         device = cairo_pdf)
   ## for some reason I can get ragg device to save figure, defauting back to png
   ## although it doesn't look as nice
   # ragg::agg_png(file_name,
@@ -143,13 +144,20 @@ plot_cume_dist <- function(fa_results,
          y = "Cumulative Distribution") +
     theme_ms() +
     theme(legend.position = "bottom")
-  agg_png(file_name,
-          width = width,
-          height = height,
-          units = units,
-          res = res)
-  plot(p1)
-  invisible(dev.off())
+  # agg_png(file_name,
+  #         width = width,
+  #         height = height,
+  #         units = units,
+  #         res = res)
+  # plot(p1)
+  # invisible(dev.off())
+  p1
+  ggsave(file_name,
+         width = width,
+         height = height,
+         units = units,
+         dpi = res,
+         device = cairo_pdf)
   
 }
 
@@ -204,13 +212,20 @@ plot_mk_map <- function(fa_results,
     theme(legend.position = "bottom",
           legend.title = element_blank())
   
-  agg_png(file_name,
-          width = width,
-          height = height,
-          units = units,
-          res = res)
-  plot(p1)
-  invisible(dev.off())
+  # agg_png(file_name,
+  #         width = width,
+  #         height = height,
+  #         units = units,
+  #         res = res)
+  # plot(p1)
+  # invisible(dev.off())
+  p1
+  ggsave(file_name,
+         width = width,
+         height = height,
+         units = units,
+         dpi = res,
+         device = cairo_pdf)
     
 }
 
@@ -243,11 +258,18 @@ plot_log_models <- function(x,
           legend.title = element_blank()
     )
   
-  agg_png(file_name,
-          width = width,
-          height = height,
-          units = units,
-          res = res)
-  plot(p1)
-  invisible(dev.off())
+  # agg_png(file_name,
+  #         width = width,
+  #         height = height,
+  #         units = units,
+  #         res = res)
+  # plot(p1)
+  # invisible(dev.off())
+  p1
+  ggsave(file_name,
+         width = width,
+         height = height,
+         units = units,
+         dpi = res,
+         device = cairo_pdf)
 }
