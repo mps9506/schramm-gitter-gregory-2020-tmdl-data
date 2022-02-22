@@ -89,6 +89,7 @@ plot_data_summary <- function(clean_data,
     theme_ms(grid = "Yy") + 
     theme(legend.position = "bottom")
   
+
   p1 + p2 + plot_annotation(tag_levels = "A")
   
   ggsave(file_name,
@@ -96,17 +97,10 @@ plot_data_summary <- function(clean_data,
          height = height,
          units = units,
          dpi = res,
-         device = cairo_pdf)
-  ## for some reason I can get ragg device to save figure, defauting back to png
-  ## although it doesn't look as nice
-  # ragg::agg_png(file_name,
-  #               width = width,
-  #               height = height,
-  #               units = units,
-  #               res = res)
-  # p
-  # invisible(dev.off())
-  
+         device = ragg::agg_png,
+         bg = "white")
+
+
 }
 
 
@@ -144,20 +138,16 @@ plot_cume_dist <- function(fa_results,
          y = "Cumulative Distribution") +
     theme_ms() +
     theme(legend.position = "bottom")
-  # agg_png(file_name,
-  #         width = width,
-  #         height = height,
-  #         units = units,
-  #         res = res)
-  # plot(p1)
-  # invisible(dev.off())
+
   p1
+
   ggsave(file_name,
          width = width,
          height = height,
          units = units,
          dpi = res,
-         device = cairo_pdf)
+         device = ragg::agg_png,
+         bg = "white")
   
 }
 
@@ -212,20 +202,16 @@ plot_mk_map <- function(fa_results,
     theme(legend.position = "bottom",
           legend.title = element_blank())
   
-  # agg_png(file_name,
-  #         width = width,
-  #         height = height,
-  #         units = units,
-  #         res = res)
-  # plot(p1)
-  # invisible(dev.off())
+
   p1
+
   ggsave(file_name,
          width = width,
          height = height,
          units = units,
          dpi = res,
-         device = cairo_pdf)
+         device = ragg::agg_png,
+         bg = "white")
     
 }
 
@@ -257,19 +243,13 @@ plot_log_models <- function(x,
           legend.direction = "horizontal",
           legend.title = element_blank()
     )
-  
-  # agg_png(file_name,
-  #         width = width,
-  #         height = height,
-  #         units = units,
-  #         res = res)
-  # plot(p1)
-  # invisible(dev.off())
+
   p1
   ggsave(file_name,
          width = width,
          height = height,
          units = units,
          dpi = res,
-         device = cairo_pdf)
+         device = ragg::agg_png,
+         bg = "white")
 }

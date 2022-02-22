@@ -64,7 +64,7 @@ plan <- drake_plan(
   #################
   fig_1 = plot_data_summary(cleaned_full_data,
                             streamflow_record,
-                            file_name = file_out("figures/fig_1.pdf"),
+                            file_name = file_out("figures/fig_1.png"),
                             width = 140,
                             height = 95,
                             units = "mm",
@@ -72,7 +72,7 @@ plan <- drake_plan(
   
   fig_2 = plot_cume_dist(flow_adjusted_mk_results, 
                          unadjusted_mk_results,
-                         file_name = file_out("figures/fig_2.pdf"),
+                         file_name = file_out("figures/fig_2.png"),
                          width = 190,
                          height = 142.5,
                          units = "mm",
@@ -80,14 +80,14 @@ plan <- drake_plan(
   
   fig_3 = plot_mk_map(flow_adjusted_mk_results, 
                       unadjusted_mk_results,
-                      file_name = file_out("figures/fig_3.pdf"),
+                      file_name = file_out("figures/fig_3.png"),
                       width = 190,
                       height = 190,
                       units = "mm",
                       res = 300),
   
   fig_4 = plot_log_models(lr_results,
-                          file_name = file_out("figures/fig_4.pdf"),
+                          file_name = file_out("figures/fig_4.png"),
                           width = 140,
                           height = 95,
                           units = "mm",
@@ -102,8 +102,8 @@ plan <- drake_plan(
   #### Render Manuscript ####
   ###########################
   manuscript = rmarkdown::render(
-    knitr_in(here::here("manuscript/jwrpm-manuscript.Rmd")),
-    output_file = file_out(here::here("manuscript/jwrpm-manuscript.docx"))
+    knitr_in("C:/Data-Analysis-Projects/schramm-gitter-gregory-2020-tmdl-data/manuscript/jcwre-manuscript.Rmd"),
+    output_file = file_out("C:/Data-Analysis-Projects/schramm-gitter-gregory-2020-tmdl-data/manuscript/jcwre-manuscript.docx")
   ),
   
   #######################

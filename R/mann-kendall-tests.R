@@ -72,6 +72,7 @@ run_fa_mk_test <- function(model_df) {
     filter(MonitoringLocationIdentifier %in% keep_stations$MonitoringLocationIdentifier) %>%
     filter(!is.na(Flow)) %>%
     filter(MonitoringLocationIdentifier != "TCEQMAIN-12185") %>% ## manual filtering
+    filter(MonitoringLocationIdentifier != "TCEQMAIN-10602") %>%    
     dplyr::select(ActivityStartDate, Flow, MonitoringLocationIdentifier, geometry, ResultMeasureValue, Impaired, TMDL) %>%
     filter(ActivityStartDate >= as.Date("2012-01-01")) %>%
     group_by(MonitoringLocationIdentifier) %>%

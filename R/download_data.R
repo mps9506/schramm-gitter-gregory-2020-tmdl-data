@@ -191,7 +191,7 @@ query_nldi <- function(x, y) {
                                        navigate_nldi(.,
                                                      mode = "upstreamMain",
                                                      data_source = "nwissite",
-                                                     distance_km = 2) ## returns upstream NWIS gages within 1 mile
+                                                     distance_km = 2)$UM_nwissite ## returns upstream NWIS gages within 1 mile
                                      }
     ))
 
@@ -203,7 +203,7 @@ query_nldi <- function(x, y) {
                                          navigate_nldi(.,
                                                        mode = "downstreamMain",
                                                        data_source = "nwissite",
-                                                       distance_km = 2) ## returns downstream NWIS gages
+                                                       distance_km = 2)$DM_nwissite ## returns downstream NWIS gages
                                        }
     ))
 
