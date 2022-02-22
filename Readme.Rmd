@@ -48,6 +48,7 @@ nhdplusTools::download_nhdplusV2(outdir = here::here("data"))
 ### Check for evidence of reproducibility
 
 ```{r eval=FALSE}
+renv::restore()
 library(drake)
 make(plan)
 config <- drake_config(plan)
@@ -86,7 +87,7 @@ make(
 
 ## Info
 
-Code and data are shared un the CC By 4.0 license. If you use the code or data, please cite this source per the DOI and the DOI of the paper (in submission).
+Code and data are shared under the CC By 4.0 license. If you use the code or data, please cite this source per the DOI and the DOI of the paper (in submission).
 
 ### System config
 
