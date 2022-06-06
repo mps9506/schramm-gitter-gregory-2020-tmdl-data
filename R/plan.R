@@ -101,10 +101,12 @@ plan <- drake_plan(
   ###########################
   #### Render Manuscript ####
   ###########################
+
   # manuscript = rmarkdown::render(
   #   knitr_in("C:/Data-Analysis-Projects/schramm-gitter-gregory-2020-tmdl-data/manuscript/jcwre-manuscript.Rmd"),
   #   output_file = file_out("C:/Data-Analysis-Projects/schramm-gitter-gregory-2020-tmdl-data/manuscript/jcwre-manuscript.docx")
   # ),
+
   
   #######################
   #### Render Readme ####
