@@ -4,3 +4,5 @@
 .Ruserdata
 data/nhd_staged/nhdplus_flowline.rds
 data/nhd_staged/nhdplus_catchment.rds
+data/NHDPlusV21_NationalData_Seamless_Geodatabase_Lower48_07/
+
