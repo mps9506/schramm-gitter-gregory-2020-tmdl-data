@@ -29,7 +29,7 @@ plan <- drake_plan(
 
   ## next step is to get the flow record for each NWIS stream gage
   streamflow_record = download_streamflows(nwis_wqp_data),
-  
+
   ## join everything
   cleaned_full_data = join_final_data(ecoli_data,
                                       swqm_sites,
@@ -39,16 +39,20 @@ plan <- drake_plan(
   #####################################
   #### Modified Mann-Kendall Tests ####
   #####################################
-  
+
   unadjusted_mk_results = run_mk_test(cleaned_full_data),
   flow_adjusted_mk_results = run_fa_mk_test(cleaned_full_data),
+  t_test_results = apply_t_test(unadjusted_mk_results, 
+                                flow_adjusted_mk_results),
   
   ##################################
   #### Fit logistic regressions ####
   ##################################
   
-  lr_results = fit_lr_models(flow_adjusted_mk_results,
-                             unadjusted_mk_results),
+  
+  ## change this just to return the individual models ##
+  # lr_results = fit_lr_models(flow_adjusted_mk_results,
+  #                            unadjusted_mk_results),
   
   
   
@@ -57,42 +61,45 @@ plan <- drake_plan(
   ################
   
   data_summary_table = summarize_data(cleaned_full_data),
-  lr_tables = tabulate_lr(lr_results),
+  # lr_tables = tabulate_lr(lr_results),
+  
+  cross_table_unadj = cc_tab_1(unadjusted_mk_results),
+  cross_table_adj = cc_tab_2(flow_adjusted_mk_results),
   
   #################
   #### Figures ####
   #################
-  fig_1 = plot_data_summary(cleaned_full_data,
-                            streamflow_record,
-                            file_name = file_out("figures/fig_1.png"),
-                            width = 140,
-                            height = 95,
-                            units = "mm",
-                            res = 300),
-  
-  fig_2 = plot_cume_dist(flow_adjusted_mk_results, 
+  # fig_1 = plot_data_summary(cleaned_full_data,
+  #                           streamflow_record,
+  #                           file_name = file_out("figures/fig_1.png"),
+  #                           width = 140,
+  #                           height = 95,
+  #                           units = "mm",
+  #                           res = 300),
+  # 
+  fig_2 = plot_cume_dist(flow_adjusted_mk_results,
                          unadjusted_mk_results,
-                         file_name = file_out("figures/fig_2.png"),
+                         file_name = file_out("figures/fig_1.png"),
                          width = 190,
                          height = 142.5,
                          units = "mm",
                          res = 300),
-  
-  fig_3 = plot_mk_map(flow_adjusted_mk_results, 
+
+  fig_3 = plot_mk_map(flow_adjusted_mk_results,
                       unadjusted_mk_results,
-                      file_name = file_out("figures/fig_3.png"),
+                      file_name = file_out("figures/fig_2.png"),
                       width = 190,
                       height = 190,
                       units = "mm",
                       res = 300),
-  
-  fig_4 = plot_log_models(lr_results,
-                          file_name = file_out("figures/fig_4.png"),
-                          width = 140,
-                          height = 95,
-                          units = "mm",
-                          res = 300),
-  
+  # 
+  # fig_4 = plot_log_models(lr_results,
+  #                         file_name = file_out("figures/fig_4.png"),
+  #                         width = 140,
+  #                         height = 95,
+  #                         units = "mm",
+  #                         res = 300),
+  # 
   #####################
   #### Export Data ####
   #####################

@@ -20,7 +20,7 @@ source("R/plan.R")      # creates the drake plan
 ###########################
 
 # specify path to your nhdplus database
-nhd_data <- "C:\\Projects\\schramm-gitter-gregory-2020-tmdl-data\\data\\NHDPlusV21_NationalData_Seamless_Geodatabase_Lower48_07\\NHDPlusNationalData\\NHDPlusV21_National_Seamless_Flattened_Lower48.gdb"
+nhd_data <- "D:\\TWRI\\Data-Resources\\NHDPlusV21_NationalData_Seamless_Geodatabase_Lower48_07\\NHDPlusNationalData\\NHDPlusV21_National_Seamless_Flattened_Lower48.gdb"
 
 ##########################################################
 #### You shouldn't need to modify anything after this ####

@@ -16,11 +16,20 @@ fit_lr_models <- function(fa_results,
            outcome = as.numeric(outcome)) %>%
     dplyr::select(MonitoringLocationIdentifier,
                   TMDL,
-                  outcome)
+                  tmdl_status,
+                  outcome) |> 
+    mutate(predictor = case_when(
+      TMDL == 0 ~ "No-TMDL",
+      TMDL == 1 & tmdl_status == "pre-tmdl" ~ "Pre-TMDL",
+      tmdl_status == "post-tmdl" ~ "Post-TMDL"
+    )) |> 
+    mutate(predictor = as_factor(predictor)) |> 
+    ## relevel so we can compare to pre-tmdl sites
+    mutate(predictor = fct_relevel(predictor, "Pre-TMDL", "Post-TMDL", "No-TMDL"))
   
-  m1_unadj <- glm(outcome ~ TMDL,
-            family = binomial,
-            data = unadj_results)
+  m1_unadj <- glm(outcome ~ predictor,
+                  family = binomial,
+                  data = unadj_results)
   
   ## flow-adjusted model
   fa_results <- fa_results %>%

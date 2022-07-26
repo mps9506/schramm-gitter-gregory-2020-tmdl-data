@@ -11,7 +11,7 @@ find_sites <- function(x){
   
   ## download ATTAINS TMDL info that lists 
   ## all the AUs with bacteria TMDLs
-  cat(crayon::blue("downloading TMDL data from TCEQ\n"))
+  cat(crayon::blue("downloading TMDL data from EPA\n"))
   ir <- read_ir_info()
   
   
@@ -21,8 +21,8 @@ find_sites <- function(x){
   df <- whatWQPsites(type = "Stream",
                organization = "TCEQMAIN",
                characteristicName = "Escherichia coli",
-               startDateLo = "01-01-2012",
-               startDateHi = "12-31-2019") %>%
+               startDateLo = "01-01-2002",
+               startDateHi = "12-31-2021") %>%
     st_as_sf(coords = c("LongitudeMeasure", "LatitudeMeasure")) %>%
     st_set_crs(4326)
   
@@ -31,13 +31,14 @@ find_sites <- function(x){
   df <- df %>%
     st_join(au_df %>% select(AU_ID, IMP_CONTAC),
             join = st_nearest_feature) %>%
-    mutate(segment = str_sub(AU_ID, end = -4)) %>%
+    #mutate(segment = str_sub(AU_ID, end = -4)) %>%
     ## classify as having TMDL if it is in the ir dataframe
     mutate(tmdl = case_when(
-      segment %in% ir$`Segment Number` ~ 1,
-      !(segment %in% ir$`Segment Number`) ~ 0
+      AU_ID %in% ir$AU_ID ~ 1,
+      !(AU_ID %in% ir$AU_ID) ~ 0
       )) %>%
-    dplyr::filter(MonitoringLocationTypeName == "River/Stream")
+    dplyr::filter(MonitoringLocationTypeName == "River/Stream") |> 
+    left_join(ir, by = c("AU_ID" = "AU_ID"))
 
   
   return(df)
@@ -47,13 +48,27 @@ find_sites <- function(x){
 ## download and clean ecoli data from STORET
 
 download_ecoli <- function(x) {
+  ##data is too long for one query
+  n <- length(x$MonitoringLocationIdentifier)
+  n_seq <- split(1:n,
+                 cut(seq_along(1:n), 3, labels = FALSE))
   
-  df <- readWQPqw(siteNumbers = x$MonitoringLocationIdentifier,
+  df_1 <- readWQPqw(siteNumbers = x$MonitoringLocationIdentifier[n_seq$`1`],
                   parameterCd = "Escherichia coli",
-                  startDate = "2012-01-01",
-                  endDate = "2019-12-31")
+                  startDate = "2001-01-01",
+                  endDate = "2021-12-31")
+  df_2 <- readWQPqw(siteNumbers = x$MonitoringLocationIdentifier[n_seq$`2`],
+                    parameterCd = "Escherichia coli",
+                    startDate = "2001-01-01",
+                    endDate = "2021-12-31")
+  df_3 <- readWQPqw(siteNumbers = x$MonitoringLocationIdentifier[n_seq$`3`],
+                    parameterCd = "Escherichia coli",
+                    startDate = "2001-01-01",
+                    endDate = "2021-12-31")
   
-  df
+  df <- dplyr::bind_rows(df_1, df_2, df_3)
+  df <- df |> dplyr::filter(ResultMeasure.MeasureUnitCode != "hours")
+  return(df)
 }
   
 clean_ecoli_data <- function(x) {
@@ -70,29 +85,33 @@ clean_ecoli_data <- function(x) {
 }
 
 
-reduce_ecoli_data <- function(x) {
-  ## minimum of 3 samples per year median
-  x %>%
-    mutate(year = as.factor(lubridate::year(ActivityStartDate))) %>%
-    group_by(MonitoringLocationIdentifier, year) %>%
-    summarise(n = n()) %>%
-    tidyr::complete(MonitoringLocationIdentifier, year, fill = list(n = 0)) %>%
-    ungroup() %>%
-    group_by(MonitoringLocationIdentifier) %>%
-    summarise(median = median(n, na.rm = TRUE)) %>%
-    filter(median >= 3)  -> x_n
-  
-  x %>%
-    filter(MonitoringLocationIdentifier %in% x_n$MonitoringLocationIdentifier) -> x
-  
-  
-  return(x)
-}
+# reduce_ecoli_data <- function(x) {
+#   ## minimum of 3 samples per year median
+#   x %>%
+#     mutate(year = as.factor(lubridate::year(ActivityStartDate))) %>%
+#     group_by(MonitoringLocationIdentifier, year) %>%
+#     summarise(n = n()) %>%
+#     tidyr::complete(MonitoringLocationIdentifier, year, fill = list(n = 0)) %>%
+#     ungroup() %>%
+#     group_by(MonitoringLocationIdentifier) %>%
+#     summarise(median = median(n, na.rm = TRUE)) %>%
+#     filter(median >= 3)  -> x_n
+#   
+#   x %>%
+#     filter(MonitoringLocationIdentifier %in% x_n$MonitoringLocationIdentifier) -> x
+#   
+#   ## two sites did not have pre-data, remove those
+#   x %>%
+#     filter(MonitoringLocationIdentifier != "TCEQMAIN-12790") %>%
+#     filter(MonitoringLocationIdentifier != "TCEQMAIN-12791") -> x
+#   
+#   return(x)
+# }
 
 get_ecoli <- function(x) {
   df <- download_ecoli(x)
   df <- clean_ecoli_data(df)
-  df <- reduce_ecoli_data(df)
+  #df <- reduce_ecoli_data(df)
   return(df)
 }
 
@@ -130,18 +149,92 @@ download_au <- function(url,
 #### TMDL Data ####
 ###################
 
+## used this prior to attains having correct data
 ## download TMDL info from TCEQ
+# read_ir_info <- function() {
+#   webpage <- read_html("https://www.tceq.texas.gov/waterquality/tmdl/nav/tmdlsegments")
+#   tbls <- html_nodes(webpage, "table")
+#   
+#   table1 <- webpage %>%
+#     html_nodes("table") %>%
+#     .[1:2] %>%
+#     html_table(fill = TRUE) %>%
+#     purrr::map_dfr(~ tibble::as_tibble(.)) %>%
+#     dplyr::filter(stringr::str_detect(Parameters, "Bacteria"))
+#   return(table1)
+# }
+
+## new version has dates!
 read_ir_info <- function() {
-  webpage <- read_html("https://www.tceq.texas.gov/waterquality/tmdl/nav/tmdlsegments")
-  tbls <- html_nodes(webpage, "table")
+  tmdls <- actions(organization_id = "TCEQMAIN",
+                   tidy = FALSE)
   
-  table1 <- webpage %>%
-    html_nodes("table") %>%
-    .[1:2] %>%
-    html_table(fill = TRUE) %>%
-    purrr::map_dfr(~ tibble::as_tibble(.)) %>%
-    dplyr::filter(stringr::str_detect(Parameters, "Bacteria"))
-  return(table1)
+  tmdls |> 
+    enter_object("items") |> 
+    gather_array() |> 
+    spread_all() |> 
+    dplyr::select(c(.data$array.index)) |> 
+    enter_object("actions") |> 
+    gather_array() |> 
+    spread_all() |> 
+    select(-c(.data$array.index)) |> 
+    enter_object("associatedWaters") |> 
+    enter_object("specificWaters") |> 
+    gather_array() |> 
+    spread_all() |> 
+    select(-c(.data$array.index)) |> 
+    enter_object("associatedPollutants") |> 
+    gather_array() |> 
+    spread_all(recursive = TRUE) |> 
+    select(-c(.data$array.index)) %>%
+    as_tibble() %>%
+    janitor::clean_names() -> tmdls
+  
+  tmdls |> 
+    filter(pollutant_name == "ESCHERICHIA COLI (E. COLI)") |> 
+    mutate(completion_date = as.Date(completion_date)) |> 
+    filter(completion_date <= as.Date("2014-12-31")) |> 
+    dplyr::select(completion_date, AU_ID = assessment_unit_identifier) |> 
+    mutate(AU_ID = str_sub(AU_ID, start = 4L)) -> tmdls
+  
+  return(tmdls)
+}
+
+
+read_new_tmdls <- function() {
+  tmdls <- actions(organization_id = "TCEQMAIN",
+                   tidy = FALSE)
+  
+  tmdls |> 
+    enter_object("items") |> 
+    gather_array() |> 
+    spread_all() |> 
+    dplyr::select(c(.data$array.index)) |> 
+    enter_object("actions") |> 
+    gather_array() |> 
+    spread_all() |> 
+    select(-c(.data$array.index)) |> 
+    enter_object("associatedWaters") |> 
+    enter_object("specificWaters") |> 
+    gather_array() |> 
+    spread_all() |> 
+    select(-c(.data$array.index)) |> 
+    enter_object("associatedPollutants") |> 
+    gather_array() |> 
+    spread_all(recursive = TRUE) |> 
+    select(-c(.data$array.index)) %>%
+    as_tibble() %>%
+    janitor::clean_names() -> tmdls
+  
+  tmdls |> 
+    filter(pollutant_name == "ESCHERICHIA COLI (E. COLI)") |> 
+    mutate(completion_date = as.Date(completion_date)) |> 
+    filter(completion_date >= as.Date("2015-01-01")) |> 
+    filter(completion_date <= as.Date("2021-12-31")) |> 
+    dplyr::select(completion_date, AU_ID = assessment_unit_identifier) |> 
+    mutate(AU_ID = str_sub(AU_ID, start = 4L)) -> tmdls
+  
+  return(tmdls)
 }
 
 
@@ -188,10 +281,10 @@ query_nldi <- function(x, y) {
     mutate(upstreamNWIS = purrr::map(wqpsite,
                                      ~{Sys.sleep(6) ## long pause so not to piss off nldi server
                                        print(.$featureID)
-                                       navigate_nldi(.,
+                                       try(navigate_nldi(.,
                                                      mode = "upstreamMain",
                                                      data_source = "nwissite",
-                                                     distance_km = 2)$UM_nwissite ## returns upstream NWIS gages within 1 mile
+                                                     distance_km = 4)$UM_nwissite) ## returns upstream NWIS gages within 1 mile
                                      }
     ))
 
@@ -200,10 +293,10 @@ query_nldi <- function(x, y) {
     mutate(downstreamNWIS = purrr::map(wqpsite,
                                        ~{Sys.sleep(6) ## long pause so not to piss off nldi server
                                          print(.$featureID)
-                                         navigate_nldi(.,
+                                         try(navigate_nldi(.,
                                                        mode = "downstreamMain",
                                                        data_source = "nwissite",
-                                                       distance_km = 2)$DM_nwissite ## returns downstream NWIS gages
+                                                       distance_km = 4)$DM_nwissite) ## returns downstream NWIS gages
                                        }
     ))
 
@@ -317,8 +410,8 @@ download_streamflows <- function(x) {
     mutate(identifier = stringr::str_replace(identifier, "USCE-", "\\"))
 
   df <- readNWISdv(x$identifier, parameterCd = "00060",
-                   startDate = "2012-01-01",
-                   endDate = "2018-12-31")
+                   startDate = "2001-01-01",
+                   endDate = "2021-12-31")
   df <- renameNWISColumns(df)
   
   ## remove sites with fewer than 1460 records
@@ -352,8 +445,42 @@ clean_SWQM_with_ecoli <- function(x, y) {
   ## x = site_info
   ## y = ecoli_data
   
+
+  
+  ## non tmdl sites
+  y |> 
+    left_join(x, by = c("MonitoringLocationIdentifier" = "MonitoringLocationIdentifier")) |> 
+    filter(tmdl == 0) |> 
+    filter(ActivityStartDate > as.Date("2015-01-01")) |> 
+    mutate(year = year(ActivityStartDate)) |> 
+    group_by(MonitoringLocationIdentifier, year) |> 
+    summarise(n = n()) |> 
+    tidyr::complete(MonitoringLocationIdentifier, year, fill = list(n = 0)) |> 
+    ungroup() |> 
+    group_by(MonitoringLocationIdentifier) |> 
+    summarise(median = median(n, na.rm = TRUE)) |> 
+    filter(median >= 3) |> 
+    ungroup() -> nontmdl_sites
+  
+  ## tmdl sites
+  y |> 
+    left_join(x, by = c("MonitoringLocationIdentifier" = "MonitoringLocationIdentifier")) |> 
+    filter(tmdl == 1) |> 
+    mutate(year = year(ActivityStartDate)) |> 
+    group_by(MonitoringLocationIdentifier, year) |> 
+    summarise(n = n()) |> 
+    tidyr::complete(MonitoringLocationIdentifier, year, fill = list(n = 0)) |> 
+    ungroup() |> 
+    group_by(MonitoringLocationIdentifier) |> 
+    summarise(median = median(n, na.rm = TRUE)) |> 
+    filter(median >= 3) |> 
+    ungroup() -> tmdl_sites
+  
+  sites <- bind_rows(nontmdl_sites, tmdl_sites)
+  
   x %>%
-    filter(MonitoringLocationIdentifier %in% unique(y$MonitoringLocationIdentifier))
+    filter(MonitoringLocationIdentifier %in% unique(sites$MonitoringLocationIdentifier))
+    
 }
 
 ## join all the data
@@ -362,13 +489,13 @@ join_final_data <- function(w, x, y, z) {
   # x = swqm_sites
   # y = nwis_wqp_data
   # z = streamflow_record
-  w %>%
+  df <- w %>%
     dplyr::select(ActivityStartDate, MonitoringLocationIdentifier, CharacteristicName, ResultMeasureValue) %>%
     left_join(x %>% dplyr::select(MonitoringLocationIdentifier,
-                                                  AU = AU_ID,
-                                                  Impaired = IMP_CONTAC,
-                                                  Segment = segment,
-                                                  TMDL = tmdl), 
+                                  AU = AU_ID,
+                                  Impaired = IMP_CONTAC,
+                                  TMDL = tmdl,
+                                  Completion_Date = completion_date), 
               by = c("MonitoringLocationIdentifier" = "MonitoringLocationIdentifier")) %>%
     left_join(y %>% select(MonitoringLocationIdentifier, 
                                               USGSSite_No = identifier),
@@ -377,5 +504,14 @@ join_final_data <- function(w, x, y, z) {
                 mutate(USGSSite_No = paste0(agency_cd, "-", site_no)) %>%
                 select(USGSSite_No, Date, Flow),
               by = c("USGSSite_No" = "USGSSite_No",
-                     "ActivityStartDate" = "Date"))
+                     "ActivityStartDate" = "Date")) %>%
+    dplyr::filter(!is.na(AU))
+  
+  ## take out au's with TMDLs adopted in the last 7 years
+  new_tmdls <- read_new_tmdls()
+  
+  df <- df |> 
+    filter(!(AU %in% new_tmdls$AU_ID))
+  df
+  
 }
