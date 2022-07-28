@@ -1,4 +1,4 @@
 fileName,name,contentUrl,encodingFormat
-cleaned_data.csv,cleaned_data,NA,csv
-flow_adjusted_mk_results.csv,flow_adjusted_mk_results,NA,csv
-unadjusted_mk_results.csv,unadjusted_mk_results,NA,csv
+cleaned_data.csv,cleaned_data,https://raw.githubusercontent.com/mps9506/schramm-gitter-gregory-2020-tmdl-data/main/data/cleaned_data.csv,csv
+flow_adjusted_mk_results.csv,flow_adjusted_mk_results,https://raw.githubusercontent.com/mps9506/schramm-gitter-gregory-2020-tmdl-data/main/data/flow_adjusted_mk_results.csv,csv
+unadjusted_mk_results.csv,unadjusted_mk_results,https://raw.githubusercontent.com/mps9506/schramm-gitter-gregory-2020-tmdl-data/main/data/unadjusted_mk_results.csv,csv
