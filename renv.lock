@@ -320,17 +320,6 @@
         "backports"
       ]
     },
-    "bayestestR": {
-      "Package": "bayestestR",
-      "Version": "0.12.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "20d1ba1ba2f76a65d54bc7e4002ddc44",
-      "Requirements": [
-        "datawizard",
-        "insight"
-      ]
-    },
     "beeswarm": {
       "Package": "beeswarm",
       "Version": "0.4.0",
@@ -693,16 +682,6 @@
         "tibble",
         "tidyr",
         "whisker"
-      ]
-    },
-    "datawizard": {
-      "Package": "datawizard",
-      "Version": "0.4.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "b1d9b9d4f73830cea95ed48f3d64be2e",
-      "Requirements": [
-        "insight"
       ]
     },
     "dbplyr": {
@@ -1103,18 +1082,6 @@
         "vipor"
       ]
     },
-    "ggeffects": {
-      "Package": "ggeffects",
-      "Version": "1.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "e8812da7ef973b9b0a3f547223ea5126",
-      "Requirements": [
-        "MASS",
-        "insight",
-        "sjlabelled"
-      ]
-    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.3.5",
@@ -1426,14 +1393,6 @@
         "pkgconfig"
       ]
     },
-    "insight": {
-      "Package": "insight",
-      "Version": "0.18.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5b7ec730d331c7bc02315fe2effde607",
-      "Requirements": []
-    },
     "ipred": {
       "Package": "ipred",
       "Version": "0.9-12",
@@ -1681,18 +1640,6 @@
         "sp"
       ]
     },
-    "margins": {
-      "Package": "margins",
-      "Version": "0.3.26",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a7719c7b7989be666f8049e7d087fbea",
-      "Requirements": [
-        "MASS",
-        "data.table",
-        "prediction"
-      ]
-    },
     "matrixStats": {
       "Package": "matrixStats",
       "Version": "0.61.0",
@@ -1908,18 +1855,6 @@
       "Hash": "67db13907a9cea89c118cf82d448799f",
       "Requirements": []
     },
-    "parameters": {
-      "Package": "parameters",
-      "Version": "0.18.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0a699bb8ad1ff58c9c603698572dda0a",
-      "Requirements": [
-        "bayestestR",
-        "datawizard",
-        "insight"
-      ]
-    },
     "patchwork": {
       "Package": "patchwork",
       "Version": "1.1.1",
@@ -2023,16 +1958,6 @@
       "Repository": "CRAN",
       "Hash": "a555924add98c99d2f411e37e7d25e9f",
       "Requirements": []
-    },
-    "prediction": {
-      "Package": "prediction",
-      "Version": "0.3.14",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0711ff44a086709b9b7441267ab303bf",
-      "Requirements": [
-        "data.table"
-      ]
     },
     "prettymapr": {
       "Package": "prettymapr",
@@ -2577,17 +2502,6 @@
         "sourcetools",
         "withr",
         "xtable"
-      ]
-    },
-    "sjlabelled": {
-      "Package": "sjlabelled",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "4bd18166ef8ca74aeec74ad295dfe77f",
-      "Requirements": [
-        "datawizard",
-        "insight"
       ]
     },
     "smwrBase": {
