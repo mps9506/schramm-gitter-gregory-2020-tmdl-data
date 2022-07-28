@@ -45,26 +45,18 @@ plan <- drake_plan(
   t_test_results = apply_t_test(unadjusted_mk_results, 
                                 flow_adjusted_mk_results),
   
-  ##################################
-  #### Fit logistic regressions ####
-  ##################################
-  
-  
-  ## change this just to return the individual models ##
-  # lr_results = fit_lr_models(flow_adjusted_mk_results,
-  #                            unadjusted_mk_results),
-  
-  
-  
+
   ################
   #### Tables ####
   ################
   
-  data_summary_table = summarize_data(cleaned_full_data),
-  # lr_tables = tabulate_lr(lr_results),
+  data_summary_table = summarize_data(cleaned_full_data,
+                                      filename = file_out("tables/table_1.html")),
   
-  cross_table_unadj = cc_tab_1(unadjusted_mk_results),
-  cross_table_adj = cc_tab_2(flow_adjusted_mk_results),
+  cross_table_unadj = cc_tab_1(unadjusted_mk_results,
+                               filename = file_out("tables/table_2.html")),
+  cross_table_adj = cc_tab_2(flow_adjusted_mk_results,
+                             filename = file_out("tables/table_3.html")),
   
   #################
   #### Figures ####
@@ -92,14 +84,7 @@ plan <- drake_plan(
                       height = 190,
                       units = "mm",
                       res = 300),
-  # 
-  # fig_4 = plot_log_models(lr_results,
-  #                         file_name = file_out("figures/fig_4.png"),
-  #                         width = 140,
-  #                         height = 95,
-  #                         units = "mm",
-  #                         res = 300),
-  # 
+
   #####################
   #### Export Data ####
   #####################

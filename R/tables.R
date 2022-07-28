@@ -6,7 +6,8 @@
 ## note these are texreg objects formatted for ms word
 
 ## Data Summary
-summarize_data <- function(cleaned_data) {
+summarize_data <- function(cleaned_data,
+                           filename) {
   
   ## unadjusted sites
   tmdl_sites <- cleaned_data |> 
@@ -228,7 +229,7 @@ summarize_data <- function(cleaned_data) {
   fa_data <- fa_data |> mutate(group_label = "Flow-Adjusted Data")
   out_df <- bind_rows(full_data, fa_data)
   
-  out_df |> 
+  out_df <- out_df |> 
     gt(rowname_col = "tmdl_status",
        groupname_col = "group_label") |> 
     cols_label(
@@ -238,60 +239,20 @@ summarize_data <- function(cleaned_data) {
       sd = html("Geometric SD<br><i>E. coli</i> Concentration<br>(MPN/100 mL)")
     )
   
-}
-
-
-
-## Logistic Regression results
-
-tabulate_lr <- function(x) {
-  mr <- texreg::matrixreg(list(x[[1]], x[[2]]),
-                          custom.coef.names = c("Intercept", "TMDL"),
-                          custom.header = list("Unadjusted" = 1, "Flow-Adjusted" = 2),
-                          custom.model.names = c("GLM", "GLM"),
-                          single.row = TRUE, 
-                          include.bic = FALSE,
-                          include.deviance = TRUE,
-                          caption = "(\\#tab:modsum1) GLM model summaries.", 
-                          output.type = "ascii", include.attributes = FALSE)
-  ft <- flextable::flextable(as.data.frame(mr))
-  ft <- width(ft,
-              width = 1)
+  gtsave(out_df,
+         filename = filename)
   
-  ft <- hline(ft, i = 1, j = c("V1","V2","V3"),
-              border = officer::fp_border(width = 1))
-  ft <- hline(ft, i = 3, j = c("V1","V2","V3"),
-              border = officer::fp_border(width = 0.5))
-  ft <- set_header_labels(ft,
-                          values = c(V1 = "",
-                                     V2 = "Unadjusted",
-                                     V3 = "Flow-Adjusted"))
-  ft <- hline(ft, i = 1, j = c("V1"),
-              border = officer::fp_border(width = 0),
-              part = "header")
-  ft <- hline(ft, i = 1, j = c("V2","V3"),
-              border = officer::fp_border(width = 0.5),
-              part = "header")
-  ft <- merge_h(ft, part = "header")
-  ft <- fontsize(ft, size = 9, part = "all")
-  ft <- align(ft, j = c("V2","V3"),
-              align = "center", part = "all")
-  ft <- autofit(ft)
-  ft <- add_footer(ft, values = c(V1 = "*** p < 0.001; ** p < 0.01;  * p < 0.05"))
-  ft <- merge_at(ft, j = 1:3, part = "footer")
-  # ft
-  ft
 }
 
 
-tabulate_lr(readd(lr_results))
 
 
 ## cross classification table and Odds ratio
 
 # unadjusted odds ratios
 # x = unadjust mk results
-cc_tab_1 <- function(x) {
+cc_tab_1 <- function(x,
+                     filename) {
   unadj_results <- x %>%
     mutate(TMDL = as.factor(TMDL),
            outcome = case_when(
@@ -344,7 +305,7 @@ cc_tab_1 <- function(x) {
   ct1 |> 
     bind_rows(ct2) -> summarytab
   
-  summarytab |> 
+  summarytab <- summarytab |> 
     pivot_wider(names_from = predictor, values_from = value) |> 
     gt() |> 
     tab_row_group(label = "", 
@@ -352,9 +313,13 @@ cc_tab_1 <- function(x) {
                   rows = outcome %in% c("No Improvement", "Improvement")) |> 
     summary_rows(groups = c("outcomes"), fns = list(Total = ~sum(as.numeric(.))))
   
+  gtsave(summarytab,
+         filename = filename)
+  
 }
 
-cc_tab_2 <- function(x) {
+cc_tab_2 <- function(x,
+                     filename) {
   
   adj_results <- x %>%
     mutate(TMDL = as.factor(TMDL),
@@ -408,12 +373,15 @@ cc_tab_2 <- function(x) {
   ct1 |> 
     bind_rows(ct2) -> summarytab
   
-  summarytab |> 
+  summarytab <- summarytab |> 
     pivot_wider(names_from = predictor, values_from = value) |> 
     gt() |> 
     tab_row_group(label = "", 
                   id = "outcomes",
                   rows = outcome %in% c("No Improvement", "Improvement")) |> 
     summary_rows(groups = c("outcomes"), fns = list(Total = ~sum(as.numeric(.))))
+  
+  gtsave(summarytab,
+         filename = filename)
 }
 

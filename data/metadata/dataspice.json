@@ -12,7 +12,7 @@
     }
   ],
   "description": "This dataset includes E. coli bacteria measurements and associated flow data for 778 water quality monitoring stations in Texas. The data was used to evaluate trends in E. coli bacteria concentration and the effectiveness of TMDLs at reducing E. coli concentrations.",
-  "datePublished": "2020-11-04",
+  "datePublished": "2022-07-28",
   "keywords": ["water quality", "total maximum daily load", "watershed", "E. coli", "fecal indicator bacteria"],
   "funder": null,
   "temporalCoverage": "NA/NA",
@@ -65,14 +65,14 @@
     {
       "type": "PropertyValue",
       "unitText": null,
-      "name": "Segment",
-      "description": "Segment Identifier for Monitoring Location"
+      "name": "TMDL",
+      "description": "TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)"
     },
     {
       "type": "PropertyValue",
       "unitText": null,
-      "name": "TMDL",
-      "description": "TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)"
+      "name": "Completion_Date",
+      "description": "Date that TMDL was adopted (YYYY-MM-DD, or NA for No TMDL)"
     },
     {
       "type": "PropertyValue",
@@ -91,6 +91,12 @@
       "unitText": null,
       "name": "Flow",
       "description": "Mean daily streamflow value of ActivityStartDate (cfs)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "tmdl_status",
+      "description": "Coding for TMDL category used to calculate odds-ratio (Pre-TMDL, Post-TMDL, No-TMDL)"
     },
     {
       "type": "PropertyValue",

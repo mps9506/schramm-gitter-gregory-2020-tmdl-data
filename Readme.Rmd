@@ -30,6 +30,8 @@ data/unadjusted_mk_results.csv
 data/metadata/
 ```
 
+These data are documented here: [mps9506.github.io/schramm-gitter-gregory-2020-tmdl-data/](https://mps9506.github.io/schramm-gitter-gregory-2020-tmdl-data/)
+
 ## Reproduce the Project
 
 If you would like to reproduce the project please follow the suggested guidelines below. The required R packages are detailed at the end.

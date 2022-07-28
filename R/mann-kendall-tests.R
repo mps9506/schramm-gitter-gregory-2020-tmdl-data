@@ -250,7 +250,7 @@ run_fa_mk_test <- function(model_df) {
            fa_slope = purrr::map_dbl(map(fa_seaken, "estimate"), "slope"),
            fa_n = purrr::map_dbl(map(fa_seaken, "estimate"), "n")) |> 
     dplyr::ungroup() |> 
-    dplyr::select(-c(data, seaken, n_med)) |> 
+    dplyr::select(-c(data, seaken, fa_seaken, n_med, start_date, end_date, years)) |> 
     mutate(tmdl_status = case_when(
       TMDL == 1 ~ tmdl_status,
       TMDL == 0 ~ "No-TMDL"))
