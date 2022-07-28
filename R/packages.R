@@ -2,6 +2,7 @@
 
 library(drake)
 library(tidyverse)
+library(tidyjson)
 library(rvest)
 library(xml2)
 library(dataRetrieval)
@@ -12,8 +13,13 @@ library(archive)
 library(smwrBase)
 library(smwrStats)
 
-## logistice regression and estimated means
+## download some TMDL data
+library(rATTAINS)
+
+## logistic regression and estimated means
+library(oddsratio)
 library(emmeans)
+library(gt)
 
 ## plotting functions
 library(hrbrthemes)

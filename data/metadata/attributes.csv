@@ -1,27 +1,37 @@
 fileName,variableName,description,unitText
-cleaned_data.csv,ActivityStartDate,Recorded date of monitoring activity,
-cleaned_data.csv,MonitoringLocationIdentifier,Location of monitoring activity (TCEQ SWQM station),
+cleaned_data.csv,ActivityStartDate,Recorded date of monitoring activity,NA
+cleaned_data.csv,MonitoringLocationIdentifier,Location of monitoring activity (TCEQ SWQM station),NA
 cleaned_data.csv,CharacteristicName,Monitoring characteristic name,NA
 cleaned_data.csv,ResultMeasureValue,Reported E. coli lab result (MPN/100 mL),NA
 cleaned_data.csv,AU,Assessment Unit identifier for Monitoring Location,NA
 cleaned_data.csv,Impaired,Indicates impairement status of the monitoring location,NA
-cleaned_data.csv,Segment,Segment Identifier for Monitoring Location,NA
 cleaned_data.csv,TMDL,"TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)",NA
+cleaned_data.csv,Completion_Date,"Date that TMDL was adopted (YYYY-MM-DD, or NA for No TMDL)",NA
 cleaned_data.csv,geometry,"Lon, Lat",NA
 cleaned_data.csv,USGSSite_No,Associated USGS Stream Gage,NA
 cleaned_data.csv,Flow,Mean daily streamflow value of ActivityStartDate (cfs),NA
 flow_adjusted_mk_results.csv,MonitoringLocationIdentifier,Location of monitoring activity (TCEQ SWQM station),NA
-flow_adjusted_mk_results.csv,geometry,"Lon, Lat",NA
+flow_adjusted_mk_results.csv,CharacteristicName,Monitoring characteristic name,NA
+flow_adjusted_mk_results.csv,AU,Assessment Unit identifier for Monitoring Location,NA
 flow_adjusted_mk_results.csv,Impaired,Indicates impairement status of the monitoring location,NA
 flow_adjusted_mk_results.csv,TMDL,"TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)",NA
+flow_adjusted_mk_results.csv,Completion_Date,"Date that TMDL was adopted (YYYY-MM-DD, or NA for No TMDL)",NA
+flow_adjusted_mk_results.csv,geometry,"Lon, Lat",NA
+flow_adjusted_mk_results.csv,USGSSite_No,Associated USGS Stream Gage,NA
+flow_adjusted_mk_results.csv,tmdl_status,"Coding for TMDL category used to calculate odds-ratio (Pre-TMDL, Post-TMDL, No-TMDL)",NA
 flow_adjusted_mk_results.csv,fa_pvalue,p-value from the flow-adjusted Mann-Kendall trend test,NA
 flow_adjusted_mk_results.csv,fa_kendallsTau,Kendall's Tau from the flow-adjusted Mann-Kendall trend test,NA
 flow_adjusted_mk_results.csv,fa_slope,Sen Slope from the flow-adjusted Mann-Kendall trend test,NA
 flow_adjusted_mk_results.csv,fa_n,number of samples used in the flow-adjusted Mann-Kendall trend test,NA
 unadjusted_mk_results.csv,MonitoringLocationIdentifier,Location of monitoring activity (TCEQ SWQM station),NA
-unadjusted_mk_results.csv,geometry,"Lon, Lat",NA
+unadjusted_mk_results.csv,CharacteristicName,Monitoring characteristic name,NA
+unadjusted_mk_results.csv,AU,Assessment Unit identifier for Monitoring Location,NA
 unadjusted_mk_results.csv,Impaired,Indicates impairement status of the monitoring location,NA
 unadjusted_mk_results.csv,TMDL,"TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)",NA
+unadjusted_mk_results.csv,Completion_Date,"Date that TMDL was adopted (YYYY-MM-DD, or NA for No TMDL)",NA
+unadjusted_mk_results.csv,geometry,"Lon, Lat",NA
+unadjusted_mk_results.csv,USGSSite_No,Associated USGS Stream Gage,NA
+unadjusted_mk_results.csv,tmdl_status,"Coding for TMDL category used to calculate odds-ratio (Pre-TMDL, Post-TMDL, No-TMDL)",NA
 unadjusted_mk_results.csv,pvalue,p-value from the unadjusted Mann-Kendall trend test,NA
 unadjusted_mk_results.csv,kendallsTau,Kendall's Tau from the unadjusted Mann-Kendall trend test,NA
 unadjusted_mk_results.csv,slope,Sen Slope from the unadjusted Mann-Kendall trend test,NA

@@ -9,13 +9,13 @@ library(dataspice)
 ############################################
 
 write_csv(readd(cleaned_full_data),
-          path = "data/cleaned_data.csv")
+          file = "data/cleaned_data.csv")
 
 write_csv(readd(unadjusted_mk_results),
-          path = "data/unadjusted_mk_results.csv")
+          file = "data/unadjusted_mk_results.csv")
 
 write_csv(readd(flow_adjusted_mk_results),
-          path = "data/flow_adjusted_mk_results.csv")
+          file = "data/flow_adjusted_mk_results.csv")
 
 create_spice()
 edit_biblio()

@@ -122,13 +122,14 @@ plot_cume_dist <- function(fa_results,
       flow_adjustment == "slope" ~ pvalue,
       flow_adjustment == "fa_slope" ~ fa_pvalue
     )) %>%
-    mutate(TMDL = forcats::fct_recode(as_factor(TMDL), "No TMDL" = "0", "TMDL" = "1"),
-           flow_adjustment = forcats::fct_recode(as_factor(flow_adjustment), "Unadjusted Mann-Kendall" = "slope", "Flow-Adjusted Mann-Kendall" = "fa_slope")) %>%
+    mutate(flow_adjustment = forcats::fct_recode(as_factor(flow_adjustment), 
+                                                 "Unadjusted Mann-Kendall" = "slope", 
+                                                 "Flow-Adjusted Mann-Kendall" = "fa_slope")) %>%
     filter(!is.na(pvalue)) %>%
     group_by(flow_adjustment, TMDL) %>%
     mutate(slope_cdf = cume_dist(slope)) %>%
     ggplot() +
-    facet_grid(TMDL~flow_adjustment) +
+    facet_grid(tmdl_status~flow_adjustment) +
     geom_point(aes(slope, slope_cdf, color = pvalue), size = 1) +
     geom_vline(xintercept = 0, linetype = 2) +
     scale_color_viridis_c(option = "plasma", name = expression(paste("modified Mann-Kendall ",italic("p"), "-value")),
@@ -136,8 +137,9 @@ plot_cume_dist <- function(fa_results,
     coord_cartesian(xlim = c(-0.8, 0.8)) +
     labs(x = "Slope\n[log(MPN/100 mL)/year]",
          y = "Cumulative Distribution") +
-    theme_ms() +
-    theme(legend.position = "bottom")
+    theme_ms(axis_text_size = 10) +
+    theme(legend.position = "bottom",
+          strip.text = element_text(size = 10))
 
   p1
 
@@ -165,24 +167,28 @@ plot_mk_map <- function(fa_results,
   
   tx <- st_read("https://opendata.arcgis.com/datasets/19506ce7231346ed809a384a5fc211b1_0.geojson")
   
-  p1 <- unadj_results %>%
-    left_join(fa_results) %>%
-    tidyr::pivot_longer(cols = c("slope", "fa_slope"), names_to = "flow_adjustment", values_to = "slope") %>%
+  p1 <- unadj_results |> 
+    left_join(fa_results) |> 
+    tidyr::pivot_longer(cols = c("slope", "fa_slope"), 
+                        names_to = "flow_adjustment", 
+                        values_to = "slope") |> 
     mutate(pvalue = case_when(
       flow_adjustment == "slope" ~ pvalue,
       flow_adjustment == "fa_slope" ~ fa_pvalue
-    )) %>%
-    mutate(TMDL = forcats::fct_recode(as_factor(TMDL), "No TMDL" = "0", "TMDL" = "1"),
-           flow_adjustment = forcats::fct_recode(as_factor(flow_adjustment), "Unadjusted Mann-Kendall" = "slope", "Flow-Adjusted Mann-Kendall" = "fa_slope")) %>%
-    filter(!is.na(pvalue)) %>%
+    )) |> 
+    mutate(tmdl_status = forcats::as_factor(tmdl_status),
+           flow_adjustment = forcats::fct_recode(as_factor(flow_adjustment), 
+                                                 "Unadjusted Mann-Kendall" = "slope", 
+                                                 "Flow-Adjusted Mann-Kendall" = "fa_slope")) |> 
+    filter(!is.na(pvalue)) |> 
     mutate(trend_direction = case_when(
       slope < 0 & pvalue < 0.10 ~ "Significant Decrease",
       slope < 0 & pvalue >= 0.10 ~ "No Trend",
       slope > 0 & pvalue >= 0.10 ~ "No Trend",
       slope > 0 & pvalue < 0.10 ~ "Significant Increase"
-    ))  %>%
-    st_as_sf() %>%
-    st_set_crs(4326)  %>%
+    ))  |> 
+    st_as_sf() |> 
+    st_set_crs(4326) |> 
     ggplot() +
     geom_sf(data = tx) +
     geom_sf(data = . %>% filter(trend_direction != "Significant Decrease"), 
@@ -197,10 +203,11 @@ plot_mk_map <- function(fa_results,
     scale_fill_manual(values = c("Significant Decrease" = "#67a9cf", 
                                  "Significant Increase" = "#ef8a62", 
                                  "No Trend" = "#ef8a62")) + 
-    facet_grid(TMDL~flow_adjustment) +
-    theme_ms(axis_text_size = 7) +
+    facet_grid(tmdl_status~flow_adjustment) +
+    theme_ms(axis_text_size = 6) +
     theme(legend.position = "bottom",
-          legend.title = element_blank())
+          legend.title = element_blank(),
+          strip.text = element_text(size = 7))
   
 
   p1
@@ -215,41 +222,3 @@ plot_mk_map <- function(fa_results,
     
 }
 
-############################################
-#### plot logisitic regresssion results ####
-############################################
-
-plot_log_models <- function(x,
-                            file_name,
-                            width,
-                            height,
-                            units,
-                            res) {
-  p1 <-   x[[3]] %>%
-    mutate(tmdl = forcats::fct_recode(TMDL,
-                                      "No TMDL" = "0",
-                                      "TMDL" = "1"),
-           model = forcats::fct_recode(model,
-                                       "GLM" = "Model 1",
-                                       "Flow-Adjusted GLM" = "Model 2")) %>%
-    ggplot() +
-    geom_pointrangeh(aes(x = prob, y = model, xmin = asymp.LCL, xmax = asymp.UCL, color = tmdl, group = tmdl), 
-                     position = position_dodgev(height = 0.2)) +
-    coord_cartesian(xlim = c(0,1)) +
-    labs(y = "",
-         x = expression(paste("Probability of Decreasing ", italic("E. coli"), " Concentration"))) +
-    theme_ms() +
-    theme(legend.position = "bottom",
-          legend.direction = "horizontal",
-          legend.title = element_blank()
-    )
-
-  p1
-  ggsave(file_name,
-         width = width,
-         height = height,
-         units = units,
-         dpi = res,
-         device = ragg::agg_png,
-         bg = "white")
-}

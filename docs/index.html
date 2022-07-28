@@ -17,7 +17,7 @@
     }
   ],
   "description": "This dataset includes E. coli bacteria measurements and associated flow data for 778 water quality monitoring stations in Texas. The data was used to evaluate trends in E. coli bacteria concentration and the effectiveness of TMDLs at reducing E. coli concentrations.",
-  "datePublished": "2020-11-04",
+  "datePublished": "2022-07-28",
   "keywords": ["water quality", "total maximum daily load", "watershed", "E. coli", "fecal indicator bacteria"],
   "funder": null,
   "temporalCoverage": "NA/NA",
@@ -70,14 +70,14 @@
     {
       "type": "PropertyValue",
       "unitText": null,
-      "name": "Segment",
-      "description": "Segment Identifier for Monitoring Location"
+      "name": "TMDL",
+      "description": "TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)"
     },
     {
       "type": "PropertyValue",
       "unitText": null,
-      "name": "TMDL",
-      "description": "TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)"
+      "name": "Completion_Date",
+      "description": "Date that TMDL was adopted (YYYY-MM-DD, or NA for No TMDL)"
     },
     {
       "type": "PropertyValue",
@@ -96,6 +96,12 @@
       "unitText": null,
       "name": "Flow",
       "description": "Mean daily streamflow value of ActivityStartDate (cfs)"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "tmdl_status",
+      "description": "Coding for TMDL category used to calculate odds-ratio (Pre-TMDL, Post-TMDL, No-TMDL)"
     },
     {
       "type": "PropertyValue",
@@ -223,7 +229,7 @@
     <table class="listing">
       <tr>
         <td>Published</td>
-        <td>2020-11-04</td>
+        <td>2022-07-28</td>
       </tr>
       <tr>
         <td>Keywords</td>
@@ -279,97 +285,102 @@
         </thead>
         <tbody>
           <tr>
-            <td>ActivityStartDate</td>
+            <td><code>ActivityStartDate</code></td>
             <td>Recorded date of monitoring activity</td>
             <td></td>
           </tr>
           <tr>
-            <td>MonitoringLocationIdentifier</td>
+            <td><code>MonitoringLocationIdentifier</code></td>
             <td>Location of monitoring activity (TCEQ SWQM station)</td>
             <td></td>
           </tr>
           <tr>
-            <td>CharacteristicName</td>
+            <td><code>CharacteristicName</code></td>
             <td>Monitoring characteristic name</td>
             <td></td>
           </tr>
           <tr>
-            <td>ResultMeasureValue</td>
+            <td><code>ResultMeasureValue</code></td>
             <td>Reported E. coli lab result (MPN/100 mL)</td>
             <td></td>
           </tr>
           <tr>
-            <td>AU</td>
+            <td><code>AU</code></td>
             <td>Assessment Unit identifier for Monitoring Location</td>
             <td></td>
           </tr>
           <tr>
-            <td>Impaired</td>
+            <td><code>Impaired</code></td>
             <td>Indicates impairement status of the monitoring location</td>
             <td></td>
           </tr>
           <tr>
-            <td>Segment</td>
-            <td>Segment Identifier for Monitoring Location</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>TMDL</td>
+            <td><code>TMDL</code></td>
             <td>TMDL status for Monitoring Location (1 = TMDL, 0 = No TMDL)</td>
             <td></td>
           </tr>
           <tr>
-            <td>geometry</td>
+            <td><code>Completion_Date</code></td>
+            <td>Date that TMDL was adopted (YYYY-MM-DD, or NA for No TMDL)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code>geometry</code></td>
             <td>Lon, Lat</td>
             <td></td>
           </tr>
           <tr>
-            <td>USGSSite_No</td>
+            <td><code>USGSSite_No</code></td>
             <td>Associated USGS Stream Gage</td>
             <td></td>
           </tr>
           <tr>
-            <td>Flow</td>
+            <td><code>Flow</code></td>
             <td>Mean daily streamflow value of ActivityStartDate (cfs)</td>
             <td></td>
           </tr>
           <tr>
-            <td>fa_pvalue</td>
+            <td><code>tmdl_status</code></td>
+            <td>Coding for TMDL category used to calculate odds-ratio (Pre-TMDL, Post-TMDL, No-TMDL)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code>fa_pvalue</code></td>
             <td>p-value from the flow-adjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
           <tr>
-            <td>fa_kendallsTau</td>
+            <td><code>fa_kendallsTau</code></td>
             <td>Kendall's Tau from the flow-adjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
           <tr>
-            <td>fa_slope</td>
+            <td><code>fa_slope</code></td>
             <td>Sen Slope from the flow-adjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
           <tr>
-            <td>fa_n</td>
+            <td><code>fa_n</code></td>
             <td>number of samples used in the flow-adjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
           <tr>
-            <td>pvalue</td>
+            <td><code>pvalue</code></td>
             <td>p-value from the unadjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
           <tr>
-            <td>kendallsTau</td>
+            <td><code>kendallsTau</code></td>
             <td>Kendall's Tau from the unadjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
           <tr>
-            <td>slope</td>
+            <td><code>slope</code></td>
             <td>Sen Slope from the unadjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
           <tr>
-            <td>n</td>
+            <td><code>n</code></td>
             <td>number of samples used in the unadjusted Mann-Kendall trend test</td>
             <td></td>
           </tr>
@@ -388,18 +399,18 @@
       </thead>
       <tbody>
         <tr>
-          <td>cleaned_data</td>
-          <td>csv</td>
+          <td><code>cleaned_data</code></td>
+          <td><code>csv</code></td>
           <td><a href="">Download</a></td>
         </tr>
         <tr>
-          <td>flow_adjusted_mk_results</td>
-          <td>csv</td>
+          <td><code>flow_adjusted_mk_results</code></td>
+          <td><code>csv</code></td>
           <td><a href="">Download</a></td>
         </tr>
         <tr>
-          <td>unadjusted_mk_results</td>
-          <td>csv</td>
+          <td><code>unadjusted_mk_results</code></td>
+          <td><code>csv</code></td>
           <td><a href="">Download</a></td>
         </tr>
       </tbody>
