@@ -99,6 +99,52 @@ summarize_data <- function(cleaned_data,
     })) |> 
     unnest(data) |> 
     ungroup() |> 
+    group_by(MonitoringLocationIdentifier) |>
+    summarize(value = DescTools::Gmean(ResultMeasureValue),
+              n_samples = n(),
+              .groups = "drop") |> 
+    summarize(n = n(),
+              samples_per_station = round(mean(n_samples), 2),
+              mean = round(DescTools::Gmean(value), 2),
+              sd = round(DescTools::Gsd(value), 2),
+              .groups = "drop")
+  
+  
+  
+  
+  categorized_data <- cleaned_data |> 
+    dplyr::filter(MonitoringLocationIdentifier %in% c(tmdl_sites$MonitoringLocationIdentifier,
+                                                      non_tmdl_sites$MonitoringLocationIdentifier)) |>
+    mutate(tmdl_status = case_when(
+      Completion_Date >= ActivityStartDate ~ "Pre-TMDL",
+      Completion_Date < ActivityStartDate ~ "Post-TMDL",
+      is.na(Completion_Date) ~ "No-TMDL"
+    )) |> 
+    dplyr::filter(!is.na(Completion_Date) |
+                    is.na(Completion_Date) & ActivityStartDate >= as.Date("2015-01-01")) |> 
+    group_by(MonitoringLocationIdentifier, tmdl_status) |> 
+    nest(data = c(ActivityStartDate, Flow, ResultMeasureValue)) %>%
+    mutate(n_med = purrr::map_dbl(data,
+                                  ~{
+                                    .x |> 
+                                      mutate(year = lubridate::year(ActivityStartDate)) |> 
+                                      group_by(year) |> 
+                                      summarize(n = n()) |> 
+                                      ungroup() |> 
+                                      summarize(n_med = as.numeric(median(n))) |> 
+                                      pull(n_med)}
+    )) |> 
+    filter(n_med>=3) |> 
+    mutate(data = purrr::map(data, ~{
+      .x %>%
+        mutate(decdate = dectime(ActivityStartDate)) %>%
+        arrange(decdate) %>%
+        group_by(ActivityStartDate, decdate) %>%
+        summarize(ResultMeasureValue = DescTools::Gmean(ResultMeasureValue),
+                  .groups = "drop")
+    })) |> 
+    unnest(data) |> 
+    ungroup() |> 
     group_by(MonitoringLocationIdentifier, tmdl_status) |>
     summarize(value = DescTools::Gmean(ResultMeasureValue),
               n_samples = n(),
@@ -214,6 +260,61 @@ summarize_data <- function(cleaned_data,
     filter(years >= 6) |> 
     unnest(data) |> 
     ungroup() |> 
+    group_by(MonitoringLocationIdentifier) |>
+    summarize(value = DescTools::Gmean(ResultMeasureValue),
+              n_samples = n(),
+              .groups = "drop") |> 
+    summarize(n = n(),
+              samples_per_station = round(mean(n_samples), 2),
+              mean = round(DescTools::Gmean(value), 2),
+              sd = round(DescTools::Gsd(value), 2),
+              .groups = "drop")
+  
+  
+  fa_categorized_data <- cleaned_data |> 
+    filter(MonitoringLocationIdentifier != "TCEQMAIN-12185") |> 
+    filter(!is.na(Flow)) |> 
+    mutate(Flow = case_when(
+      Flow < 0 ~ 0,
+      Flow >=0 ~ Flow
+    )) |> 
+    dplyr::filter(MonitoringLocationIdentifier %in% c(tmdl_sites$MonitoringLocationIdentifier,
+                                                      non_tmdl_sites$MonitoringLocationIdentifier)) |>
+    mutate(tmdl_status = case_when(
+      Completion_Date >= ActivityStartDate ~ "Pre-TMDL",
+      Completion_Date < ActivityStartDate ~ "Post-TMDL",
+      is.na(Completion_Date) ~ "No-TMDL"
+    )) |> 
+    dplyr::filter(!is.na(Completion_Date) |
+                    is.na(Completion_Date) & ActivityStartDate >= as.Date("2015-01-01")) |> 
+    group_by(MonitoringLocationIdentifier, tmdl_status) |> 
+    nest(data = c(ActivityStartDate, Flow, ResultMeasureValue)) %>%
+    mutate(n_med = purrr::map_dbl(data,
+                                  ~{
+                                    .x |> 
+                                      mutate(year = lubridate::year(ActivityStartDate)) |> 
+                                      group_by(year) |> 
+                                      summarize(n = n()) |> 
+                                      ungroup() |> 
+                                      summarize(n_med = as.numeric(median(n))) |> 
+                                      pull(n_med)}
+    )) |> 
+    filter(n_med>=3) |> 
+    mutate(data = purrr::map(data, ~{
+      .x %>%
+        mutate(decdate = dectime(ActivityStartDate)) %>%
+        arrange(decdate) %>%
+        group_by(ActivityStartDate, decdate) %>%
+        summarize(ResultMeasureValue = DescTools::Gmean(ResultMeasureValue),
+                  .groups = "drop")
+    })) |> 
+    mutate(start_date = purrr::map(data, ~min(.x$ActivityStartDate)),
+           end_date = purrr::map(data, ~max(.x$ActivityStartDate))) |>
+    unnest(c(start_date, end_date)) |> 
+    mutate(years = round(as.numeric((end_date - start_date)/365),0)) |>
+    filter(years >= 6) |> 
+    unnest(data) |> 
+    ungroup() |> 
     group_by(MonitoringLocationIdentifier, tmdl_status) |>
     summarize(value = DescTools::Gmean(ResultMeasureValue),
               n_samples = n(),
@@ -225,8 +326,16 @@ summarize_data <- function(cleaned_data,
               sd = round(DescTools::Gsd(value), 2),
               .groups = "drop")
   
-  full_data <- full_data |> mutate(group_label = "Unadjusted Data")
-  fa_data <- fa_data |> mutate(group_label = "Flow-Adjusted Data")
+  
+  full_data <- full_data |> mutate(tmdl_status = "Total")
+  full_data <- categorized_data |> 
+    bind_rows(full_data) |> 
+    mutate(group_label = "Unadjusted Data")
+  
+  fa_data <- fa_data |> mutate(tmdl_status = "Total")
+  fa_data <- fa_categorized_data |> 
+    bind_rows(fa_data) |> 
+    mutate(group_label = "Flow-Adjusted Data")
   out_df <- bind_rows(full_data, fa_data)
   
   out_df <- out_df |> 
