@@ -148,7 +148,8 @@ plot_cume_dist <- function(fa_results,
          height = height,
          units = units,
          dpi = res,
-         device = ragg::agg_png,
+         device = cairo_pdf,
+         #device = ragg::agg_png,
          bg = "white")
   
 }
@@ -217,7 +218,8 @@ plot_mk_map <- function(fa_results,
          height = height,
          units = units,
          dpi = res,
-         device = ragg::agg_png,
+         device = cairo_pdf,
+         #device = ragg::agg_png,
          bg = "white")
     
 }
