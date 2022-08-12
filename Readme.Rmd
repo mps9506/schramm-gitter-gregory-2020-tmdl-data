@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 paste0("Time of last build: ", Sys.time())
 ```
 
-This repository contains the data and code for Schramm, Gitter, and Gregory, "Total Maximum Daily Loads and *Escherichia coli* trends in Texas freshwater streams." Manuscript is currently in submission.
+This repository contains the data and code for Schramm, Gitter, and Gregory, "Total Maximum Daily Loads and *Escherichia coli* trends in Texas freshwater streams." Manuscript is accepted and in press.
 
 ## Introduction
 

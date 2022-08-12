@@ -6,11 +6,11 @@ freshwater streams
 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![DOI](https://zenodo.org/badge/307874510.svg)](https://zenodo.org/badge/latestdoi/307874510)
 
-    ## [1] "Time of last build: 2022-07-28 09:49:14"
+    ## [1] "Time of last build: 2022-08-12 12:03:18"
 
 This repository contains the data and code for Schramm, Gitter, and
 Gregory, “Total Maximum Daily Loads and *Escherichia coli* trends in
-Texas freshwater streams.” Manuscript is currently in submission.
+Texas freshwater streams.” Manuscript is accepted and in press.
 
 ## Introduction
 
@@ -101,7 +101,7 @@ paper (in submission).
     ##  collate  English_United States.utf8
     ##  ctype    English_United States.utf8
     ##  tz       America/Chicago
-    ##  date     2022-07-28
+    ##  date     2022-08-12
     ##  rstudio  2022.02.3+492 Prairie Trillium (desktop)
     ##  pandoc   2.17.1.1 @ C:/Program Files/RStudio/bin/quarto/bin/ (via rmarkdown)
     ## 
@@ -115,12 +115,9 @@ paper (in submission).
     ##    base64enc       0.1-3      2015-07-28 [2] CRAN (R 4.2.0)
     ##  P base64url       1.4        2018-05-14 [?] CRAN (R 4.2.1)
     ##  P beeswarm        0.4.0      2021-06-01 [?] CRAN (R 4.2.0)
-    ##    bit             4.0.4      2020-08-04 [2] CRAN (R 4.2.1)
-    ##    bit64           4.0.5      2020-08-30 [2] CRAN (R 4.2.1)
     ##  P bookdown      * 0.24       2021-09-02 [?] CRAN (R 4.2.1)
     ##    boot            1.3-28     2021-05-03 [2] CRAN (R 4.2.1)
     ##  P broom           0.7.11     2022-01-03 [?] CRAN (R 4.2.1)
-    ##    bslib           0.3.1      2021-10-06 [2] CRAN (R 4.2.1)
     ##    cachem          1.0.6      2021-08-19 [2] CRAN (R 4.2.1)
     ##  P car             3.0-12     2021-11-06 [?] CRAN (R 4.2.1)
     ##  P carData         3.0-5      2022-01-06 [?] CRAN (R 4.2.1)
@@ -135,7 +132,6 @@ paper (in submission).
     ##    curl            4.3.2      2021-06-23 [2] CRAN (R 4.2.1)
     ##    data.table      1.14.2     2021-09-27 [2] CRAN (R 4.2.1)
     ##  P dataRetrieval * 2.7.11     2022-02-18 [?] CRAN (R 4.2.1)
-    ##  P dataspice     * 1.1.0      2021-05-16 [?] CRAN (R 4.2.1)
     ##  P DBI             1.1.2      2021-12-20 [?] CRAN (R 4.2.0)
     ##  P dbplyr          2.1.1      2021-04-06 [?] CRAN (R 4.2.0)
     ##  P DescTools       0.99.44    2021-11-23 [?] CRAN (R 4.2.1)
@@ -175,18 +171,14 @@ paper (in submission).
     ##  P hoardr          0.5.2      2018-12-02 [?] CRAN (R 4.2.1)
     ##  P hrbrthemes    * 0.8.0      2020-03-06 [?] CRAN (R 4.2.1)
     ##    htmltools       0.5.2      2021-08-25 [2] CRAN (R 4.2.1)
-    ##  P htmlwidgets     1.5.4      2021-09-08 [?] CRAN (R 4.2.1)
     ##  P httpcode        0.3.0      2020-04-10 [?] CRAN (R 4.2.1)
-    ##  P httpuv          1.6.5      2022-01-05 [?] CRAN (R 4.2.1)
     ##  P httr            1.4.2      2020-07-20 [?] CRAN (R 4.2.1)
     ##  P igraph          1.2.11     2022-01-04 [?] CRAN (R 4.2.1)
     ##  P janitor         2.1.0      2021-01-05 [?] CRAN (R 4.2.1)
-    ##    jquerylib       0.1.4      2021-04-26 [2] CRAN (R 4.2.1)
     ##  P jsonlite        1.7.3      2022-01-17 [?] CRAN (R 4.2.1)
     ##    KernSmooth      2.23-20    2021-05-03 [2] CRAN (R 4.2.1)
     ##  P knitr         * 1.37       2021-12-16 [?] CRAN (R 4.2.1)
     ##    labeling        0.4.2      2020-10-20 [2] CRAN (R 4.2.0)
-    ##  P later           1.3.0      2021-08-18 [?] CRAN (R 4.2.1)
     ##    lattice         0.20-45    2021-09-22 [2] CRAN (R 4.2.1)
     ##  P leaps           3.1        2020-01-16 [?] CRAN (R 4.2.1)
     ##    lifecycle       1.0.1      2021-09-24 [2] CRAN (R 4.2.1)
@@ -197,7 +189,6 @@ paper (in submission).
     ##  P Matrix          1.4-0      2021-12-08 [?] CRAN (R 4.2.1)
     ##    memoise         2.0.1      2021-11-26 [2] CRAN (R 4.2.1)
     ##  P mgcv            1.8-38     2021-10-06 [?] CRAN (R 4.2.1)
-    ##    mime            0.12       2021-09-28 [2] CRAN (R 4.2.0)
     ##    modelr          0.1.8      2020-05-19 [2] CRAN (R 4.2.1)
     ##    munsell         0.5.0      2018-06-12 [2] CRAN (R 4.2.1)
     ##  P mvtnorm         1.1-3      2021-10-08 [?] CRAN (R 4.2.0)
@@ -212,7 +203,6 @@ paper (in submission).
     ##    pkgconfig       2.0.3      2019-09-22 [2] CRAN (R 4.2.1)
     ##    prettyunits     1.1.1      2020-01-24 [2] CRAN (R 4.2.1)
     ##    progress        1.2.2      2019-05-16 [2] CRAN (R 4.2.1)
-    ##  P promises        1.2.0.1    2021-02-11 [?] CRAN (R 4.2.1)
     ##  P proxy           0.4-26     2021-06-07 [?] CRAN (R 4.2.0)
     ##    purrr         * 0.3.4      2020-04-17 [2] CRAN (R 4.2.1)
     ##    R6              2.5.1      2021-08-19 [2] CRAN (R 4.2.1)
@@ -226,7 +216,6 @@ paper (in submission).
     ##  P readxl          1.3.1      2019-03-13 [?] CRAN (R 4.2.1)
     ##    renv            0.15.1     2022-01-13 [1] CRAN (R 4.2.1)
     ##    reprex          2.0.1      2021-08-05 [2] CRAN (R 4.2.1)
-    ##  P rhandsontable   0.3.8      2021-05-27 [?] CRAN (R 4.2.1)
     ##  P rlang           1.0.3      2022-06-27 [?] CRAN (R 4.2.1)
     ##  P rlist           0.4.6.2    2021-09-03 [?] CRAN (R 4.2.1)
     ##  P rmarkdown       2.11       2021-09-14 [?] CRAN (R 4.2.1)
@@ -237,11 +226,9 @@ paper (in submission).
     ##    rvest         * 1.0.2      2021-10-16 [2] CRAN (R 4.2.1)
     ##    rvg             0.2.5      2020-06-30 [2] CRAN (R 4.2.1)
     ##  P s2              1.0.7      2021-09-28 [?] CRAN (R 4.2.1)
-    ##  P sass            0.4.0      2021-05-12 [?] CRAN (R 4.2.1)
     ##  P scales          1.1.1      2020-05-11 [?] CRAN (R 4.2.1)
     ##  P sessioninfo     1.2.2      2021-12-06 [?] CRAN (R 4.2.1)
     ##  P sf            * 1.0-7      2022-03-07 [?] CRAN (R 4.2.0)
-    ##  P shiny         * 1.7.1      2021-10-02 [?] CRAN (R 4.2.1)
     ##  P smwrBase      * 1.1.5      2022-07-05 [?] repository (https://github.com/USGS-R/smwrBase@2478663)
     ##  P smwrGraphs    * 1.1.4.9000 2022-07-05 [?] repository (https://github.com/USGS-R/smwrGraphs@f3debe7)
     ##  P smwrStats     * 0.7.6      2022-07-05 [?] repository (https://github.com/USGS-R/smwrStats@2e02eb7)
@@ -251,7 +238,6 @@ paper (in submission).
     ##    stringi         1.7.6      2021-11-29 [2] CRAN (R 4.2.0)
     ##    stringr       * 1.4.0      2019-02-10 [2] CRAN (R 4.2.1)
     ##  P systemfonts     1.0.3      2021-10-13 [?] CRAN (R 4.2.1)
-    ##  P texreg          1.37.5     2020-06-18 [?] CRAN (R 4.2.1)
     ##    textshaping     0.3.6      2021-10-13 [2] CRAN (R 4.2.1)
     ##  P tibble        * 3.1.6      2021-11-07 [?] CRAN (R 4.2.1)
     ##  P tidyjson      * 0.3.1      2020-05-31 [?] CRAN (R 4.2.1)
@@ -266,7 +252,6 @@ paper (in submission).
     ##  P vctrs           0.4.1      2022-04-13 [?] CRAN (R 4.2.1)
     ##  P vipor           0.4.5      2017-03-22 [?] CRAN (R 4.2.1)
     ##    viridisLite     0.4.0      2021-04-13 [2] CRAN (R 4.2.1)
-    ##    vroom           1.5.7      2021-11-30 [2] CRAN (R 4.2.1)
     ##  P whisker         0.4        2019-08-28 [?] CRAN (R 4.2.1)
     ##  P withr           2.4.3      2021-11-30 [?] CRAN (R 4.2.1)
     ##  P wk              0.6.0      2022-01-03 [?] CRAN (R 4.2.1)
