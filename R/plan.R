@@ -71,7 +71,7 @@ plan <- drake_plan(
   # 
   fig_2 = plot_cume_dist(flow_adjusted_mk_results,
                          unadjusted_mk_results,
-                         file_name = file_out("figures/fig_1.png"),
+                         file_name = file_out("figures/fig_1.pdf"),
                          width = 190,
                          height = 142.5,
                          units = "mm",
@@ -79,7 +79,7 @@ plan <- drake_plan(
 
   fig_3 = plot_mk_map(flow_adjusted_mk_results,
                       unadjusted_mk_results,
-                      file_name = file_out("figures/fig_2.png"),
+                      file_name = file_out("figures/fig_2.pdf"),
                       width = 190,
                       height = 190,
                       units = "mm",
