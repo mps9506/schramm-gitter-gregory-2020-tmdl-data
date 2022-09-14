@@ -17,7 +17,10 @@ knitr::opts_chunk$set(echo = TRUE)
 paste0("Time of last build: ", Sys.time())
 ```
 
-This repository contains the data and code for Schramm, Gitter, and Gregory, "Total Maximum Daily Loads and *Escherichia coli* trends in Texas freshwater streams." Manuscript is accepted and in press.
+This repository contains the data and code for:
+
+Schramm, M., Gitter, A. and Gregory, L. (2022), Total Maximum Daily Loads and Escherichia coli Trends in Texas Freshwater Streams. Journal of Contemporary Water Research & Education, 176: 36-49. https://doi.org/10.1111/j.1936-704X.2022.3374.x
+
 
 ## Introduction
 
@@ -89,7 +92,7 @@ make(
 
 ## Info
 
-Code and data are shared under the CC By 4.0 license. If you use the code or data, please cite this source per the DOI and the DOI of the paper (in submission).
+Code and data are shared under the CC By 4.0 license. If you use the code or data, please cite this source per the DOI and the DOI of the paper.
 
 ### System config
 
