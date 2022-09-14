@@ -6,11 +6,14 @@ freshwater streams
 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![DOI](https://zenodo.org/badge/307874510.svg)](https://zenodo.org/badge/latestdoi/307874510)
 
-    ## [1] "Time of last build: 2022-08-12 12:03:18"
+    ## [1] "Time of last build: 2022-09-14 11:58:18"
 
-This repository contains the data and code for Schramm, Gitter, and
-Gregory, “Total Maximum Daily Loads and *Escherichia coli* trends in
-Texas freshwater streams.” Manuscript is accepted and in press.
+This repository contains the data and code for:
+
+Schramm, M., Gitter, A. and Gregory, L. (2022), Total Maximum Daily
+Loads and Escherichia coli Trends in Texas Freshwater Streams. Journal
+of Contemporary Water Research & Education, 176: 36-49.
+<https://doi.org/10.1111/j.1936-704X.2022.3374.x>
 
 ## Introduction
 
@@ -87,11 +90,11 @@ make(
 
 Code and data are shared under the CC By 4.0 license. If you use the
 code or data, please cite this source per the DOI and the DOI of the
-paper (in submission).
+paper.
 
 ### System config
 
-    ## ─ Session info ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ─ Session info ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
     ##  setting  value
     ##  version  R version 4.2.1 (2022-06-23 ucrt)
     ##  os       Windows 10 x64 (build 19044)
@@ -101,11 +104,11 @@ paper (in submission).
     ##  collate  English_United States.utf8
     ##  ctype    English_United States.utf8
     ##  tz       America/Chicago
-    ##  date     2022-08-12
+    ##  date     2022-09-14
     ##  rstudio  2022.02.3+492 Prairie Trillium (desktop)
     ##  pandoc   2.17.1.1 @ C:/Program Files/RStudio/bin/quarto/bin/ (via rmarkdown)
     ## 
-    ## ─ Packages ──────────────────────────────────────────────────────────────────────────────────────────────────
+    ## ─ Packages ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
     ##  ! package       * version    date (UTC) lib source
     ##  P abind           1.4-5      2016-07-21 [?] CRAN (R 4.2.0)
     ##  P akima           0.6-2.3    2021-11-02 [?] CRAN (R 4.2.1)
@@ -148,7 +151,6 @@ paper (in submission).
     ##  P extrafont     * 0.17       2014-12-08 [?] CRAN (R 4.2.1)
     ##  P extrafontdb     1.0        2012-06-11 [?] CRAN (R 4.2.0)
     ##  P fansi           1.0.2      2022-01-14 [?] CRAN (R 4.2.1)
-    ##    farver          2.1.0      2021-02-28 [2] CRAN (R 4.2.1)
     ##    fastmap         1.1.0      2021-01-25 [2] CRAN (R 4.2.1)
     ##  P fauxpas         0.5.0      2020-04-13 [?] CRAN (R 4.2.1)
     ##  P filelock        1.0.2      2018-10-05 [?] CRAN (R 4.2.1)
@@ -178,7 +180,6 @@ paper (in submission).
     ##  P jsonlite        1.7.3      2022-01-17 [?] CRAN (R 4.2.1)
     ##    KernSmooth      2.23-20    2021-05-03 [2] CRAN (R 4.2.1)
     ##  P knitr         * 1.37       2021-12-16 [?] CRAN (R 4.2.1)
-    ##    labeling        0.4.2      2020-10-20 [2] CRAN (R 4.2.0)
     ##    lattice         0.20-45    2021-09-22 [2] CRAN (R 4.2.1)
     ##  P leaps           3.1        2020-01-16 [?] CRAN (R 4.2.1)
     ##    lifecycle       1.0.1      2021-09-24 [2] CRAN (R 4.2.1)
@@ -225,7 +226,6 @@ paper (in submission).
     ##  P Rttf2pt1        1.3.9      2021-07-22 [?] CRAN (R 4.2.1)
     ##    rvest         * 1.0.2      2021-10-16 [2] CRAN (R 4.2.1)
     ##    rvg             0.2.5      2020-06-30 [2] CRAN (R 4.2.1)
-    ##  P s2              1.0.7      2021-09-28 [?] CRAN (R 4.2.1)
     ##  P scales          1.1.1      2020-05-11 [?] CRAN (R 4.2.1)
     ##  P sessioninfo     1.2.2      2021-12-06 [?] CRAN (R 4.2.1)
     ##  P sf            * 1.0-7      2022-03-07 [?] CRAN (R 4.2.0)
@@ -251,10 +251,8 @@ paper (in submission).
     ##  P uuid            1.0-3      2021-11-01 [?] CRAN (R 4.2.1)
     ##  P vctrs           0.4.1      2022-04-13 [?] CRAN (R 4.2.1)
     ##  P vipor           0.4.5      2017-03-22 [?] CRAN (R 4.2.1)
-    ##    viridisLite     0.4.0      2021-04-13 [2] CRAN (R 4.2.1)
     ##  P whisker         0.4        2019-08-28 [?] CRAN (R 4.2.1)
     ##  P withr           2.4.3      2021-11-30 [?] CRAN (R 4.2.1)
-    ##  P wk              0.6.0      2022-01-03 [?] CRAN (R 4.2.1)
     ##  P xfun            0.29       2021-12-14 [?] CRAN (R 4.2.1)
     ##    xml2          * 1.3.3      2021-11-30 [2] CRAN (R 4.2.1)
     ##  P xtable          1.8-4      2019-04-21 [?] CRAN (R 4.2.1)
@@ -266,4 +264,4 @@ paper (in submission).
     ## 
     ##  P ── Loaded and on-disk path mismatch.
     ## 
-    ## ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    ## ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

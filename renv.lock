@@ -2668,16 +2668,6 @@
         "withr"
       ]
     },
-    "texreg": {
-      "Package": "texreg",
-      "Version": "1.37.5",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "21566475541e841a951c578544a22642",
-      "Requirements": [
-        "httr"
-      ]
-    },
     "textshaping": {
       "Package": "textshaping",
       "Version": "0.3.6",
